@@ -238,9 +238,9 @@ export default function App() {
   ];
 
   return (
-    <div className="min-h-screen bg-slate-50">
-      {/* Single sticky header */}
-      <header className="bg-white border-b border-gray-100 shadow-sm sticky top-0 z-40">
+    <div className="flex flex-col h-screen h-dvh bg-slate-50">
+      {/* Header — pinned by flex layout, not sticky */}
+      <header className="bg-white border-b border-gray-100 shadow-sm z-40 shrink-0">
         {/* Top row: branding + actions */}
         <div className="max-w-6xl mx-auto px-4 pt-3 pb-2 flex items-center justify-between gap-3">
           <div className="flex items-center gap-2.5">
@@ -390,7 +390,8 @@ export default function App() {
         )}
       </header>
 
-      {/* Main content */}
+      {/* Scrollable content area */}
+      <div className="flex-1 overflow-y-auto">
       <main className="max-w-6xl mx-auto px-4 py-6 space-y-4">
         {/* Results count + sort */}
         <div className="flex items-center justify-between gap-2">
@@ -463,7 +464,7 @@ export default function App() {
       </main>
 
       {/* Footer */}
-      <footer className="text-center text-xs text-gray-300 py-8">
+      <footer className="text-center text-xs text-gray-300 py-8 max-w-6xl mx-auto w-full">
         <a
           href="https://github.com/GavinOvsak/FOAMapps"
           target="_blank"
@@ -480,6 +481,8 @@ export default function App() {
           Submit an app
         </a>
       </footer>
+
+      </div> {/* end scrollable area */}
 
       {/* Modals */}
       {showInfoModal && (
