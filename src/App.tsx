@@ -97,6 +97,7 @@ export default function App() {
   const [myStarFilter, setMyStarFilter] = useState(loadMyStarFilter);
   const [localStarred, setLocalStarred] = useState<Set<string>>(loadLocalStars);
   const [sort, setSort] = useState<SortOption>(loadSort);
+  const [showFilters, setShowFilters] = useState(false);
 
   const { repoStars, userStarred, loadingUserStars, rateLimited } =
     useGitHubData(apps, githubUsername);
@@ -206,10 +207,14 @@ export default function App() {
 
     // Always float starred apps to the top (stable — preserves sort within each group)
     result = [...result].sort((a, b) => {
-      const aStarred = !!(a.github ? userStarred.has(a.github) : localStarred.has(a.url))
-      const bStarred = !!(b.github ? userStarred.has(b.github) : localStarred.has(b.url))
-      return Number(bStarred) - Number(aStarred)
-    })
+      const aStarred = !!(a.github
+        ? userStarred.has(a.github)
+        : localStarred.has(a.url));
+      const bStarred = !!(b.github
+        ? userStarred.has(b.github)
+        : localStarred.has(b.url));
+      return Number(bStarred) - Number(aStarred);
+    });
 
     return result;
   }, [
@@ -234,9 +239,10 @@ export default function App() {
 
   return (
     <div className="min-h-screen bg-slate-50">
-      {/* Header */}
+      {/* Single sticky header */}
       <header className="bg-white border-b border-gray-100 shadow-sm sticky top-0 z-40">
-        <div className="max-w-6xl mx-auto px-4 py-3 flex items-center justify-between gap-3">
+        {/* Top row: branding + actions */}
+        <div className="max-w-6xl mx-auto px-4 pt-3 pb-2 flex items-center justify-between gap-3">
           <div className="flex items-center gap-2.5">
             <span className="text-xl">⚕️</span>
             <div>
@@ -334,19 +340,58 @@ export default function App() {
             </button>
           </div>
         </div>
+
+        {/* Search row */}
+        <div className="max-w-6xl mx-auto px-4 py-2.5 flex items-center gap-2">
+          <div className="flex-1">
+            <SearchBar value={search} onChange={setSearch} />
+          </div>
+          <button
+            onClick={() => setShowFilters((v) => !v)}
+            title="Toggle tag filters"
+            className={`flex items-center gap-1.5 shrink-0 text-sm font-medium px-3 py-2.5 rounded-xl border transition-colors ${
+              showFilters || activeTags.size > 0
+                ? "bg-blue-50 border-blue-200 text-blue-700"
+                : "bg-white border-gray-200 text-gray-500 hover:bg-gray-50"
+            }`}
+          >
+            <svg
+              className="w-4 h-4"
+              fill="none"
+              stroke="currentColor"
+              viewBox="0 0 24 24"
+            >
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth={2}
+                d="M3 4a1 1 0 011-1h16a1 1 0 011 1v2a1 1 0 01-.293.707L13 13.414V19a1 1 0 01-.553.894l-4 2A1 1 0 017 21v-7.586L3.293 6.707A1 1 0 013 6V4z"
+              />
+            </svg>
+            <span className="hidden sm:inline">Filter</span>
+            {activeTags.size > 0 && (
+              <span className="bg-blue-600 text-white text-xs rounded-full w-4 h-4 flex items-center justify-center leading-none">
+                {activeTags.size}
+              </span>
+            )}
+          </button>
+        </div>
+
+        {/* Collapsible tag filters */}
+        {showFilters && (
+          <div className="max-w-6xl mx-auto px-4 pb-3">
+            <TagFilter
+              allTags={allTags}
+              activeTags={activeTags}
+              onToggle={toggleTag}
+              onClear={() => setActiveTags(new Set())}
+            />
+          </div>
+        )}
       </header>
 
       {/* Main content */}
       <main className="max-w-6xl mx-auto px-4 py-6 space-y-4">
-        <SearchBar value={search} onChange={setSearch} />
-
-        <TagFilter
-          allTags={allTags}
-          activeTags={activeTags}
-          onToggle={toggleTag}
-          onClear={() => setActiveTags(new Set())}
-        />
-
         {/* Results count + sort */}
         <div className="flex items-center justify-between gap-2">
           <div className="text-xs text-gray-400">
