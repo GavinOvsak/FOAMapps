@@ -250,7 +250,7 @@ export default function App() {
                 FOAM Apps
               </h1>
               <p className="text-xs text-gray-400 leading-none mt-0.5">
-                Free Open Access Medical
+                Free Open Access Medical Apps
               </p>
             </div>
           </div>
@@ -389,101 +389,99 @@ export default function App() {
           </div>
         )}
       </header>
-
       {/* Scrollable content area */}
       <div className="flex-1 overflow-y-auto">
-      <main className="max-w-6xl mx-auto px-4 py-6 space-y-4">
-        {/* Results count + sort */}
-        <div className="flex items-center justify-between gap-2">
-          <div className="text-xs text-gray-400">
-            {loadingApps
-              ? "Loading apps…"
-              : `${filtered.length} of ${apps.length} apps`}
-            {myStarFilter && (
-              <span className="ml-1 text-amber-600 font-medium">
-                • filtered by your stars
-              </span>
-            )}
-          </div>
-          <select
-            value={sort}
-            onChange={(e) => handleSortChange(e.target.value as SortOption)}
-            className="text-xs text-gray-500 bg-white border border-gray-200 rounded-lg px-2 py-1.5 focus:outline-none focus:ring-1 focus:ring-blue-400"
-          >
-            {SORT_OPTIONS.map((o) => (
-              <option key={o.value} value={o.value}>
-                {o.label}
-              </option>
-            ))}
-          </select>
-        </div>
-
-        {/* Grid */}
-        {loadingApps ? (
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
-            {Array.from({ length: 6 }).map((_, i) => (
-              <div
-                key={i}
-                className="bg-white rounded-xl border border-gray-100 h-36 animate-pulse"
-              />
-            ))}
-          </div>
-        ) : filtered.length === 0 ? (
-          <div className="text-center py-16 text-gray-400">
-            <p className="text-4xl mb-3">🔍</p>
-            <p className="text-sm">No apps match your filters.</p>
-            <button
-              onClick={() => {
-                setSearch("");
-                setActiveTags(new Set());
-                setMyStarFilter(false);
-                saveMyStarFilter(false);
-              }}
-              className="mt-2 text-sm text-blue-500 underline"
+        <main className="max-w-6xl mx-auto px-4 py-6 space-y-4">
+          {/* Results count + sort */}
+          <div className="flex items-center justify-between gap-2">
+            <div className="text-xs text-gray-400">
+              {loadingApps
+                ? "Loading apps…"
+                : `${filtered.length} of ${apps.length} apps`}
+              {myStarFilter && (
+                <span className="ml-1 text-amber-600 font-medium">
+                  • filtered by your stars
+                </span>
+              )}
+            </div>
+            <select
+              value={sort}
+              onChange={(e) => handleSortChange(e.target.value as SortOption)}
+              className="text-xs text-gray-500 bg-white border border-gray-200 rounded-lg px-2 py-1.5 focus:outline-none focus:ring-1 focus:ring-blue-400"
             >
-              Clear all filters
-            </button>
+              {SORT_OPTIONS.map((o) => (
+                <option key={o.value} value={o.value}>
+                  {o.label}
+                </option>
+              ))}
+            </select>
           </div>
-        ) : (
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
-            {filtered.map((app) => (
-              <AppCard
-                key={app.name}
-                app={app}
-                stars={app.github ? repoStars[app.github] : undefined}
-                isUserStarred={!!app.github && userStarred.has(app.github)}
-                isLocalStarred={!app.github && localStarred.has(app.url)}
-                onToggleLocalStar={() => toggleLocalStar(app.url)}
-                onOpenDetail={() => setSelectedApp(app)}
-                activeTag={activeTags.size === 1 ? [...activeTags][0] : null}
-                onTagClick={handleCardTagClick}
-              />
-            ))}
-          </div>
-        )}
-      </main>
 
-      {/* Footer */}
-      <footer className="text-center text-xs text-gray-300 py-8 max-w-6xl mx-auto w-full">
-        <a
-          href="https://github.com/GavinOvsak/FOAMapps"
-          target="_blank"
-          rel="noopener noreferrer"
-          className="hover:text-gray-500 transition-colors"
-        >
-          github.com/GavinOvsak/FOAMapps
-        </a>
-        {" · "}
-        <a
-          href={`mailto:${SUBMIT_EMAIL}`}
-          className="hover:text-gray-500 transition-colors"
-        >
-          Submit an app
-        </a>
-      </footer>
+          {/* Grid */}
+          {loadingApps ? (
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+              {Array.from({ length: 6 }).map((_, i) => (
+                <div
+                  key={i}
+                  className="bg-white rounded-xl border border-gray-100 h-36 animate-pulse"
+                />
+              ))}
+            </div>
+          ) : filtered.length === 0 ? (
+            <div className="text-center py-16 text-gray-400">
+              <p className="text-4xl mb-3">🔍</p>
+              <p className="text-sm">No apps match your filters.</p>
+              <button
+                onClick={() => {
+                  setSearch("");
+                  setActiveTags(new Set());
+                  setMyStarFilter(false);
+                  saveMyStarFilter(false);
+                }}
+                className="mt-2 text-sm text-blue-500 underline"
+              >
+                Clear all filters
+              </button>
+            </div>
+          ) : (
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+              {filtered.map((app) => (
+                <AppCard
+                  key={app.name}
+                  app={app}
+                  stars={app.github ? repoStars[app.github] : undefined}
+                  isUserStarred={!!app.github && userStarred.has(app.github)}
+                  isLocalStarred={!app.github && localStarred.has(app.url)}
+                  onToggleLocalStar={() => toggleLocalStar(app.url)}
+                  onOpenDetail={() => setSelectedApp(app)}
+                  activeTag={activeTags.size === 1 ? [...activeTags][0] : null}
+                  onTagClick={handleCardTagClick}
+                />
+              ))}
+            </div>
+          )}
+        </main>
 
-      </div> {/* end scrollable area */}
-
+        {/* Footer */}
+        <footer className="text-center text-xs text-gray-300 py-8 max-w-6xl mx-auto w-full">
+          <a
+            href="https://github.com/GavinOvsak/FOAMapps"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="hover:text-gray-500 transition-colors"
+          >
+            github.com/GavinOvsak/FOAMapps
+          </a>
+          {" · "}
+          <a
+            href={`mailto:${SUBMIT_EMAIL}`}
+            className="hover:text-gray-500 transition-colors"
+          >
+            Submit an app
+          </a>
+        </footer>
+      </div>{" "}
+      {/* end scrollable area */}
       {/* Modals */}
       {showInfoModal && (
         <InfoModal
