@@ -1,0 +1,179 @@
+[
+  {
+    "name": "MDCalc",
+    "url": "https://www.mdcalc.com",
+    "tags": ["calculators", "scores", "general"],
+    "description": "The most widely used medical calculator and clinical decision support tool, with hundreds of validated scores and risk stratification tools.",
+    "dateAdded": "2026-05-25"
+  },
+  {
+    "name": "LITFL – Life in the Fast Lane",
+    "url": "https://litfl.com",
+    "tags": ["emergency", "critical-care", "ECG", "reference", "toxicology"],
+    "description": "Comprehensive emergency medicine and critical care education resource covering ECG library, toxicology, and clinical cases.",
+    "dateAdded": "2026-05-25"
+  },
+  {
+    "name": "EMCrit",
+    "url": "https://emcrit.org",
+    "tags": ["emergency", "critical-care", "resuscitation"],
+    "description": "Emergency medicine and critical care education by Scott Weingart, focusing on resuscitation, airway management, and ICU-level ED care.",
+    "dateAdded": "2026-05-25"
+  },
+  {
+    "name": "Radiopaedia",
+    "url": "https://radiopaedia.org",
+    "tags": ["radiology", "imaging", "reference"],
+    "description": "Collaborative radiology reference with thousands of cases, articles, and a comprehensive imaging encyclopedia.",
+    "dateAdded": "2026-05-25"
+  },
+  {
+    "name": "REBEL EM",
+    "url": "https://rebelem.com",
+    "tags": ["emergency", "evidence-based"],
+    "description": "Evidence-based emergency medicine reviews critically appraising the latest research to guide clinical practice.",
+    "dateAdded": "2026-05-25"
+  },
+  {
+    "name": "CoreEM",
+    "url": "https://coreem.net",
+    "tags": ["emergency", "reference"],
+    "description": "Core emergency medicine educational content covering key diagnoses, procedures, and clinical pearls.",
+    "dateAdded": "2026-05-25"
+  },
+  {
+    "name": "OpenPediatrics",
+    "url": "https://www.openpediatrics.org",
+    "tags": ["pediatrics", "critical-care", "education"],
+    "description": "Global pediatric critical care education platform offering courses, simulations, and expert lectures for healthcare providers worldwide.",
+    "dateAdded": "2026-05-25"
+  },
+  {
+    "name": "ClinCalc",
+    "url": "https://clincalc.com",
+    "tags": ["calculators", "pharmacology", "statistics"],
+    "description": "Clinical calculators and drug dosing tools for healthcare professionals, including drug interaction checkers and statistical calculators.",
+    "dateAdded": "2026-05-25"
+  },
+  {
+    "name": "Global RPh",
+    "url": "https://globalrph.com",
+    "tags": ["pharmacology", "calculators", "dosing"],
+    "description": "Comprehensive pharmacist-curated drug dosing calculators, renal dosing guides, and clinical pharmacy references.",
+    "dateAdded": "2026-05-25"
+  },
+  {
+    "name": "NephSIM",
+    "url": "https://nephsim.com",
+    "tags": ["nephrology", "simulation", "education"],
+    "description": "Interactive nephrology simulation platform for learning and practicing renal physiology and clinical decision-making.",
+    "dateAdded": "2026-05-25"
+  },
+  {
+    "name": "PulmCCM",
+    "url": "https://pulmccm.org",
+    "tags": ["pulmonology", "critical-care", "evidence-based"],
+    "description": "Evidence-based critical care and pulmonology updates summarising landmark trials and clinical guidelines for intensivists.",
+    "dateAdded": "2026-05-25"
+  },
+  {
+    "name": "Taming the SRU",
+    "url": "https://www.tamingthesru.com",
+    "tags": ["emergency", "ultrasound", "critical-care"],
+    "description": "Emergency medicine education focused on point-of-care ultrasound, resuscitation, and managing the sickest ED patients.",
+    "dateAdded": "2026-05-25"
+  },
+  {
+    "name": "EM Clerkship",
+    "url": "https://www.emclerkship.com",
+    "tags": ["emergency", "education", "students"],
+    "description": "Emergency medicine clerkship resource for medical students covering core presentations, procedures, and survival guides.",
+    "dateAdded": "2026-05-25"
+  },
+  {
+    "name": "Pediatric Emergency Standards",
+    "url": "https://www.pedsemergencycare.com",
+    "tags": ["pediatrics", "emergency", "reference"],
+    "description": "Reference standards and clinical guidelines for pediatric emergency care, including weight-based dosing and resuscitation checklists.",
+    "dateAdded": "2026-05-25"
+  },
+  {
+    "name": "Internet Book of Critical Care (IBCC)",
+    "url": "https://emcrit.org/ibcc/toc",
+    "tags": ["critical-care", "reference", "education"],
+    "description": "Free online critical care textbook by Josh Farkas covering every ICU topic in depth with practical, evidence-based guidance.",
+    "dateAdded": "2026-05-25"
+  },
+  {
+    "name": "StatPearls",
+    "url": "https://www.ncbi.nlm.nih.gov/books/NBK430685",
+    "tags": ["reference", "education", "general"],
+    "description": "Continuously updated, peer-reviewed medical reference available free via NCBI, covering thousands of clinical topics.",
+    "dateAdded": "2026-05-25"
+  },
+  {
+    "name": "EBM Consult",
+    "url": "https://www.ebmconsult.com",
+    "tags": ["evidence-based", "calculators", "reference"],
+    "description": "Evidence-based medicine calculators, clinical criteria, and quick reference tools grounded in the primary literature.",
+    "dateAdded": "2026-05-25"
+  },
+  {
+    "name": "Toronto Notes Online",
+    "url": "https://torontonotes.ca",
+    "tags": ["reference", "education", "general"],
+    "description": "Concise, comprehensive clinical review resource originally developed by University of Toronto medical students, widely used for board preparation.",
+    "dateAdded": "2026-05-25"
+  },
+  {
+    "name": "Amboss (Free Tier)",
+    "url": "https://www.amboss.com",
+    "tags": ["reference", "education", "pharmacology", "students"],
+    "description": "Medical knowledge platform with a free tier providing access to a large library of clinical articles, Qbank previews, and drug information.",
+    "dateAdded": "2026-05-25"
+  },
+  {
+    "name": "The NNT",
+    "url": "https://www.thennt.com",
+    "tags": ["evidence-based", "statistics", "pharmacology"],
+    "description": "Plain-language summaries of NNT (number needed to treat) and NNH for common therapies, making trial data accessible at the bedside.",
+    "dateAdded": "2026-05-25"
+  },
+  {
+    "name": "Rational Clinical Examination (JAMA)",
+    "url": "https://jamanetwork.com/collections/44038/the-rational-clinical-examination",
+    "tags": ["evidence-based", "physical-exam", "reference"],
+    "description": "JAMA series reviewing the evidence behind physical examination findings and their diagnostic accuracy.",
+    "dateAdded": "2026-05-25"
+  },
+  {
+    "name": "Teach Me Anatomy",
+    "url": "https://teachmeanatomy.info",
+    "tags": ["anatomy", "education", "reference"],
+    "description": "Free, illustrated anatomy reference covering all body regions with clear diagrams and clinical correlations for students and clinicians.",
+    "dateAdded": "2026-05-25"
+  },
+  {
+    "name": "Kenhub",
+    "url": "https://www.kenhub.com",
+    "tags": ["anatomy", "education"],
+    "description": "Interactive anatomy learning platform with illustrated atlases, quizzes, and video tutorials (free tier available).",
+    "dateAdded": "2026-05-25"
+  },
+  {
+    "name": "3D Slicer",
+    "url": "https://www.slicer.org",
+    "tags": ["imaging", "radiology", "research"],
+    "github": "Slicer/Slicer",
+    "description": "Open-source platform for medical image informatics, image processing, and 3D visualization used in research and clinical settings.",
+    "dateAdded": "2026-05-25"
+  },
+  {
+    "name": "OpenMRS",
+    "url": "https://openmrs.org",
+    "tags": ["EMR", "global-health", "education"],
+    "github": "openmrs/openmrs-core",
+    "description": "Open-source electronic medical records platform designed for resource-constrained environments, powering health systems across Africa, Asia, and beyond.",
+    "dateAdded": "2026-05-25"
+  }
+]

@@ -1,0 +1,69 @@
+name: Add a FOAM App
+description: Submit a free, open-access medical app for inclusion in the directory
+title: "[Add App] "
+labels: ["new-app"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thanks for contributing to the FOAM Apps directory! Please fill out the fields below.
+        All apps must be **free** and **openly accessible** without a paywall.
+
+  - type: input
+    id: name
+    attributes:
+      label: App Name
+      description: The display name of the app or resource
+      placeholder: e.g. MDCalc
+    validations:
+      required: true
+
+  - type: input
+    id: url
+    attributes:
+      label: App URL
+      description: The main URL to access the app
+      placeholder: https://www.example.com
+    validations:
+      required: true
+
+  - type: input
+    id: github
+    attributes:
+      label: GitHub Repository (optional)
+      description: |
+        If the app has a public GitHub repository, enter it as `owner/repo`.
+        Leave blank if there is no public repo.
+      placeholder: owner/repo
+
+  - type: input
+    id: tags
+    attributes:
+      label: Tags
+      description: |
+        Comma-separated list of relevant tags. Use lowercase, hyphen-separated words.
+        Examples: emergency, critical-care, calculators, pediatrics, radiology, pharmacology
+      placeholder: emergency, calculators, scores
+    validations:
+      required: true
+
+  - type: textarea
+    id: why
+    attributes:
+      label: Why does this app belong in the directory?
+      description: Brief explanation of what the app does and who it helps
+      placeholder: Briefly describe the app and its clinical utility…
+    validations:
+      required: true
+
+  - type: checkboxes
+    id: checklist
+    attributes:
+      label: Submission checklist
+      options:
+        - label: The app is free to use (no paywall for core functionality)
+          required: true
+        - label: The URL is publicly accessible
+          required: true
+        - label: I have searched the existing apps list to avoid duplicates
+          required: true
