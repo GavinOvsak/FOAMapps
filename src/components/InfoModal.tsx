@@ -61,7 +61,7 @@ export default function InfoModal({ onClose, submitEmail }: Props) {
           <li>
             Open a{' '}
             <a
-              href="https://github.com/ggovsak/FOAMapps/issues/new?template=add-app.yml"
+              href="https://github.com/GavinOvsak/FOAMapps/issues/new?template=add-app.yml"
               target="_blank"
               rel="noopener noreferrer"
               className="text-blue-600 underline"

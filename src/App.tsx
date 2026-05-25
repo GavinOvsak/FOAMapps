@@ -204,6 +204,13 @@ export default function App() {
       );
     }
 
+    // Always float starred apps to the top (stable — preserves sort within each group)
+    result = [...result].sort((a, b) => {
+      const aStarred = !!(a.github ? userStarred.has(a.github) : localStarred.has(a.url))
+      const bStarred = !!(b.github ? userStarred.has(b.github) : localStarred.has(b.url))
+      return Number(bStarred) - Number(aStarred)
+    })
+
     return result;
   }, [
     apps,
@@ -413,12 +420,12 @@ export default function App() {
       {/* Footer */}
       <footer className="text-center text-xs text-gray-300 py-8">
         <a
-          href="https://github.com/ggovsak/FOAMapps"
+          href="https://github.com/GavinOvsak/FOAMapps"
           target="_blank"
           rel="noopener noreferrer"
           className="hover:text-gray-500 transition-colors"
         >
-          github.com/ggovsak/FOAMapps
+          github.com/GavinOvsak/FOAMapps
         </a>
         {" · "}
         <a
