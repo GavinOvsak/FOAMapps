@@ -175,5 +175,20 @@
     "github": "openmrs/openmrs-core",
     "description": "Open-source electronic medical records platform designed for resource-constrained environments, powering health systems across Africa, Asia, and beyond.",
     "dateAdded": "2026-05-25"
+  },
+  {
+    "name": "BlockDocs",
+    "url": "https://blockdocs.github.io/",
+    "tags": ["anesthesia", "regional-anesthesia", "reference", "procedures"],
+    "github": "blockdocs/blockdocs.github.io",
+    "description": "Free open-access reference for regional anesthesia and nerve blocks, with illustrated guides to ultrasound-guided and landmark techniques.",
+    "dateAdded": "2026-05-25"
+  },
+  {
+    "name": "Coags",
+    "url": "https://coags.app/",
+    "tags": ["hematology", "anticoagulation", "calculators", "pharmacology"],
+    "description": "Practical anticoagulation and coagulation management tool for clinicians, covering dosing, reversal agents, and bridging decisions.",
+    "dateAdded": "2026-05-25"
   }
 ]
