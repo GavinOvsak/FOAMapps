@@ -93,7 +93,7 @@ export default function AppCard({
 
       {/* Description */}
       {app.description && (
-        <p className="px-4 pb-2 text-xs text-gray-400 line-clamp-1">{app.description}</p>
+        <p className="px-4 pb-2 text-xs text-gray-400 truncate">{app.description}</p>
       )}
 
       {/* Tags */}
