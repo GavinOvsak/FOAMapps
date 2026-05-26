@@ -190,5 +190,12 @@
     "tags": ["hematology", "anticoagulation", "calculators", "pharmacology"],
     "description": "Practical anticoagulation and coagulation management tool for clinicians, covering dosing, reversal agents, and bridging decisions.",
     "dateAdded": "2026-05-25"
+  },
+  {
+    "name": "PEPT – Perioperative Electrophysiology Training Program",
+    "url": "https://pept.org/",
+    "tags": ["anesthesia", "education", "ECG", "reference"],
+    "description": "Welcome to the Perioperative Electrophysiology Training Program website. This website is designed to help anesthesiologists learn how to manage pacemakers and ICDs in the perioperative period. On this website, you will find the Credentialing Process we use at the MGH, the lectures that are required for this credentialing process, and much more.",
+    "dateAdded": "2026-05-25"
   }
 ]
