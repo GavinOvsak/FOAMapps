@@ -1,5 +1,7 @@
 # ⚕️ FOAM Apps (Free Open Access Medical Web Apps)
 
+🔗 **Live Directory**: [gavinovsak.github.io/FOAMapps](https://gavinovsak.github.io/FOAMapps/)
+
 FOAM Apps is an open, curated directory of **Free Open Access Medical education (FOAM)** web applications, calculators, reference engines, interactive simulations, and other digital tools designed for healthcare professionals, students, and clinical researchers.
 
 This interactive web application makes it easy for clinicians to discover, search, filter, and star their favorite bedside and educational resources.
@@ -57,39 +59,6 @@ The project is built using a modern, fast frontend development stack:
 * **Styling**: [TailwindCSS](https://tailwindcss.com/) for fluid, flexible layouts and beautiful modern responsive UI.
 * **API Integration**: RESTful communication with the [GitHub API](https://docs.github.com/en/rest) to fetch live social proof.
 * **State & Persistence**: Client-side `localStorage` caching for caching repository statistics, star configurations, and active user preferences.
-
----
-
-## 💻 Getting Started
-
-### Prerequisites
-Make sure you have [Node.js](https://nodejs.org/) installed on your machine.
-
-### Installation
-Clone the repository and install the dependencies:
-```bash
-npm install
-```
-
-### Development Server
-Run the local development server:
-```bash
-npm run dev
-```
-This will start Vite's local dev server, typically running at `http://localhost:5173/`.
-
-### Production Build
-To build the application for production, compile the TypeScript code and bundle the assets using Vite:
-```bash
-npm run build
-```
-The compiled, production-ready static assets will be output to the `dist/` directory.
-
-### Code Quality
-Ensure the code conforms to standard quality controls:
-```bash
-npm run lint
-```
 
 ---
 
