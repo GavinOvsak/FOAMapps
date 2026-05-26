@@ -43,7 +43,7 @@ body:
       description: |
         Comma-separated list of relevant tags. Use lowercase, hyphen-separated words.
         Examples: emergency, critical-care, calculators, pediatrics, radiology, pharmacology
-      placeholder: emergency, calculators, scores
+      placeholder: emergency, calculators, pharmacology
     validations:
       required: true
 

@@ -19,7 +19,7 @@ To add a new application or update an existing one in the directory, simply appe
 {
   "name": "MDCalc",
   "url": "https://www.mdcalc.com",
-  "tags": ["calculators", "scores", "general"],
+  "tags": ["calculators"],
   "description": "The most widely used medical calculator and clinical decision support tool, with hundreds of validated scores and risk stratification tools.",
   "dateAdded": "2026-05-25",
   "github": "optional/repo-path"

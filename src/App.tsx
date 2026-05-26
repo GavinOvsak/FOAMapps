@@ -137,10 +137,23 @@ export default function App() {
     saveSort(next);
   };
 
-  const allTags = useMemo(
-    () => [...new Set(apps.flatMap((a) => a.tags))].sort(),
-    [apps],
-  );
+  const allTags = useMemo(() => {
+    const counts: Record<string, number> = {};
+    apps.forEach((app) => {
+      app.tags.forEach((tag) => {
+        counts[tag] = (counts[tag] || 0) + 1;
+      });
+    });
+
+    return Object.entries(counts)
+      .map(([name, count]) => ({ name, count }))
+      .sort((a, b) => {
+        if (b.count !== a.count) {
+          return b.count - a.count;
+        }
+        return a.name.localeCompare(b.name);
+      });
+  }, [apps]);
 
   const toggleTag = (tag: string) =>
     setActiveTags((prev) => {

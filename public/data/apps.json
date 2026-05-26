@@ -2,28 +2,28 @@
   {
     "name": "MDCalc",
     "url": "https://www.mdcalc.com",
-    "tags": ["calculators", "scores", "general"],
+    "tags": ["calculators"],
     "description": "The most widely used medical calculator and clinical decision support tool, with hundreds of validated scores and risk stratification tools.",
     "dateAdded": "2026-05-25"
   },
   {
     "name": "LITFL – Life in the Fast Lane",
     "url": "https://litfl.com",
-    "tags": ["emergency", "critical-care", "ECG", "reference", "toxicology"],
+    "tags": ["emergency", "critical-care", "ECG", "reference", "pharmacology"],
     "description": "Comprehensive emergency medicine and critical care education resource covering ECG library, toxicology, and clinical cases.",
     "dateAdded": "2026-05-25"
   },
   {
     "name": "EMCrit",
     "url": "https://emcrit.org",
-    "tags": ["emergency", "critical-care", "resuscitation"],
+    "tags": ["emergency", "critical-care"],
     "description": "Emergency medicine and critical care education by Scott Weingart, focusing on resuscitation, airway management, and ICU-level ED care.",
     "dateAdded": "2026-05-25"
   },
   {
     "name": "Radiopaedia",
     "url": "https://radiopaedia.org",
-    "tags": ["radiology", "imaging", "reference"],
+    "tags": ["radiology", "reference"],
     "description": "Collaborative radiology reference with thousands of cases, articles, and a comprehensive imaging encyclopedia.",
     "dateAdded": "2026-05-25"
   },
@@ -58,7 +58,7 @@
   {
     "name": "Global RPh",
     "url": "https://globalrph.com",
-    "tags": ["pharmacology", "calculators", "dosing"],
+    "tags": ["pharmacology", "calculators"],
     "description": "Comprehensive pharmacist-curated drug dosing calculators, renal dosing guides, and clinical pharmacy references.",
     "dateAdded": "2026-05-25"
   },
@@ -107,7 +107,7 @@
   {
     "name": "StatPearls",
     "url": "https://www.ncbi.nlm.nih.gov/books/NBK430685",
-    "tags": ["reference", "education", "general"],
+    "tags": ["reference", "education"],
     "description": "Continuously updated, peer-reviewed medical reference available free via NCBI, covering thousands of clinical topics.",
     "dateAdded": "2026-05-25"
   },
@@ -121,7 +121,7 @@
   {
     "name": "Toronto Notes Online",
     "url": "https://torontonotes.ca",
-    "tags": ["reference", "education", "general"],
+    "tags": ["reference", "education"],
     "description": "Concise, comprehensive clinical review resource originally developed by University of Toronto medical students, widely used for board preparation.",
     "dateAdded": "2026-05-25"
   },
@@ -142,7 +142,7 @@
   {
     "name": "Rational Clinical Examination (JAMA)",
     "url": "https://jamanetwork.com/collections/44038/the-rational-clinical-examination",
-    "tags": ["evidence-based", "physical-exam", "reference"],
+    "tags": ["evidence-based", "reference"],
     "description": "JAMA series reviewing the evidence behind physical examination findings and their diagnostic accuracy.",
     "dateAdded": "2026-05-25"
   },
@@ -163,7 +163,7 @@
   {
     "name": "3D Slicer",
     "url": "https://www.slicer.org",
-    "tags": ["imaging", "radiology", "research"],
+    "tags": ["radiology", "education"],
     "github": "Slicer/Slicer",
     "description": "Open-source platform for medical image informatics, image processing, and 3D visualization used in research and clinical settings.",
     "dateAdded": "2026-05-25"
@@ -171,7 +171,7 @@
   {
     "name": "OpenMRS",
     "url": "https://openmrs.org",
-    "tags": ["EMR", "global-health", "education"],
+    "tags": ["global-health", "education"],
     "github": "openmrs/openmrs-core",
     "description": "Open-source electronic medical records platform designed for resource-constrained environments, powering health systems across Africa, Asia, and beyond.",
     "dateAdded": "2026-05-25"
@@ -179,7 +179,7 @@
   {
     "name": "BlockDocs",
     "url": "https://blockdocs.github.io/",
-    "tags": ["anesthesia", "regional-anesthesia", "reference", "procedures"],
+    "tags": ["anesthesia", "reference"],
     "github": "blockdocs/blockdocs.github.io",
     "description": "Free open-access reference for regional anesthesia and nerve blocks, with illustrated guides to ultrasound-guided and landmark techniques.",
     "dateAdded": "2026-05-25"
@@ -187,7 +187,7 @@
   {
     "name": "Coags",
     "url": "https://coags.app/",
-    "tags": ["hematology", "anticoagulation", "calculators", "pharmacology"],
+    "tags": ["hematology", "calculators", "pharmacology"],
     "description": "Practical anticoagulation and coagulation management tool for clinicians, covering dosing, reversal agents, and bridging decisions.",
     "dateAdded": "2026-05-25"
   },

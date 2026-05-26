@@ -22,8 +22,13 @@ function getColors(tag: string): [string, string] {
   return PALETTE[idx]
 }
 
+export interface TagInfo {
+  name: string
+  count: number
+}
+
 interface Props {
-  allTags: string[]
+  allTags: TagInfo[]
   activeTags: Set<string>
   onToggle: (tag: string) => void
   onClear: () => void
@@ -37,17 +42,24 @@ export default function TagFilter({ allTags, activeTags, onToggle, onClear }: Pr
       <span className="text-xs font-medium text-gray-500 shrink-0">Filter:</span>
       <div className="flex gap-1.5 flex-wrap">
         {allTags.map(tag => {
-          const [inactive, active] = getColors(tag)
-          const isActive = activeTags.has(tag)
+          const [inactive, active] = getColors(tag.name)
+          const isActive = activeTags.has(tag.name)
           return (
             <button
-              key={tag}
-              onClick={() => onToggle(tag)}
-              className={`text-xs font-medium px-2.5 py-1 rounded-full transition-colors ${
+              key={tag.name}
+              onClick={() => onToggle(tag.name)}
+              className={`text-xs font-medium px-2.5 py-1 rounded-full transition-colors inline-flex items-center gap-1.5 ${
                 isActive ? active : `${inactive} hover:opacity-80`
               }`}
             >
-              {tag}
+              <span>{tag.name}</span>
+              <span
+                className={`inline-flex items-center justify-center text-[10px] font-bold px-1.5 py-0.5 rounded-full ${
+                  isActive ? 'bg-white/20 text-white' : 'bg-black/10 text-current'
+                }`}
+              >
+                {tag.count}
+              </span>
             </button>
           )
         })}
