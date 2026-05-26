@@ -197,5 +197,12 @@
     "tags": ["anesthesia", "education", "ECG", "reference"],
     "description": "Welcome to the Perioperative Electrophysiology Training Program website. This website is designed to help anesthesiologists learn how to manage pacemakers and ICDs in the perioperative period. On this website, you will find the Credentialing Process we use at the MGH, the lectures that are required for this credentialing process, and much more.",
     "dateAdded": "2026-05-25"
+  },
+  {
+    "name": "BiliTool",
+    "url": "https://bilitool.org/",
+    "tags": ["pediatrics", "calculators", "reference"],
+    "description": "BiliTool provides care recommendations for newborn infants with jaundice (hyperbilirubinemia) at risk for bilirubin encephalopathy and kernicterus.",
+    "dateAdded": "2026-05-25"
   }
 ]
