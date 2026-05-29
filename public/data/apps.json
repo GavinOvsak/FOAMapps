@@ -204,5 +204,13 @@
     "tags": ["pediatrics", "calculators", "reference"],
     "description": "BiliTool provides care recommendations for newborn infants with jaundice (hyperbilirubinemia) at risk for bilirubin encephalopathy and kernicterus.",
     "dateAdded": "2026-05-25"
+  },
+  {
+    "name": "CodeRunner – ACLS / PALS Companion",
+    "url": "https://gavinovsak.github.io/CodeRunner/",
+    "tags": ["emergency", "critical-care", "pediatrics", "reference"],
+    "github": "GavinOvsak/CodeRunner",
+    "description": "ACLS / PALS resuscitation protocol companion for trained healthcare providers to manage cardiac arrest and pediatric emergencies.",
+    "dateAdded": "2026-05-29"
   }
 ]
