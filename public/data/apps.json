@@ -208,7 +208,7 @@
   {
     "name": "CodeRunner – ACLS / PALS Companion",
     "url": "https://gavinovsak.github.io/CodeRunner/",
-    "tags": ["emergency", "critical-care", "pediatrics", "reference"],
+    "tags": ["anesthesia", "emergency", "critical-care", "pediatrics", "reference"],
     "github": "GavinOvsak/CodeRunner",
     "description": "ACLS / PALS resuscitation protocol companion for trained healthcare providers to manage cardiac arrest and pediatric emergencies.",
     "dateAdded": "2026-05-29"
