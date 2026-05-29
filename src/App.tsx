@@ -66,9 +66,9 @@ function saveLocalStars(stars: Set<string>) {
 }
 function loadSort(): SortOption {
   try {
-    return (localStorage.getItem(SORT_KEY) as SortOption) ?? "default";
+    return (localStorage.getItem(SORT_KEY) as SortOption) ?? "stars-desc";
   } catch {
-    return "default";
+    return "stars-desc";
   }
 }
 function saveSort(v: SortOption) {
