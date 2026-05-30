@@ -75,7 +75,12 @@ function buildAvailableLanguages(dataLanguages: string[]): string[] {
   });
 }
 
-function AppInner() {
+interface AppInnerProps {
+  languagePrefs: string[]
+  onSaveLanguagePrefs: (langs: string[]) => void
+}
+
+function AppInner({ languagePrefs, onSaveLanguagePrefs }: AppInnerProps) {
   const t = useT();
   const [apps, setApps] = useState<App[]>([]);
   const [loadingApps, setLoadingApps] = useState(true);
@@ -101,9 +106,6 @@ function AppInner() {
     load(SORT_KEY, "stars-desc" as SortOption, (v) => v as SortOption)
   );
   const [showFilters, setShowFilters] = useState(false);
-  const [languagePrefs, setLanguagePrefs] = useState<string[]>(() =>
-    load(LANG_PREFS_KEY, [], (v) => JSON.parse(v) as string[])
-  );
 
   const { repoStars, userStarred, loadingUserStars, rateLimited } =
     useGitHubData(apps, githubUsername);
@@ -157,8 +159,8 @@ function AppInner() {
   };
 
   const handleSaveLanguagePrefs = (langs: string[]) => {
-    setLanguagePrefs(langs);
     save(LANG_PREFS_KEY, JSON.stringify(langs));
+    onSaveLanguagePrefs(langs);
   };
 
   const toggleLanguage = (code: string) =>
@@ -638,14 +640,9 @@ function AppInner() {
 }
 
 export default function App() {
-  const [languagePrefs] = useState<string[]>(() => {
-    try {
-      const raw = localStorage.getItem("foamapps_language_prefs");
-      return raw ? (JSON.parse(raw) as string[]) : [];
-    } catch {
-      return [];
-    }
-  });
+  const [languagePrefs, setLanguagePrefs] = useState<string[]>(() =>
+    load(LANG_PREFS_KEY, [], (v) => JSON.parse(v) as string[])
+  );
 
   const browserLanguages = useMemo(() => getBrowserLanguages(), []);
   const effectiveLanguages = languagePrefs.length > 0 ? languagePrefs : browserLanguages;
@@ -653,7 +650,7 @@ export default function App() {
 
   return (
     <TranslationProvider lang={uiLanguage}>
-      <AppInner />
+      <AppInner languagePrefs={languagePrefs} onSaveLanguagePrefs={setLanguagePrefs} />
     </TranslationProvider>
   );
 }
