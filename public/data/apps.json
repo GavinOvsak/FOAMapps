@@ -2,7 +2,9 @@
   {
     "name": "MDCalc",
     "url": "https://www.mdcalc.com",
-    "category": "clinical",
+    "category": [
+      "clinical"
+    ],
     "languages": [
       "en"
     ],
@@ -15,7 +17,9 @@
   {
     "name": "LITFL – Life in the Fast Lane",
     "url": "https://litfl.com",
-    "category": "clinical",
+    "category": [
+      "clinical"
+    ],
     "languages": [
       "en"
     ],
@@ -32,7 +36,9 @@
   {
     "name": "EMCrit",
     "url": "https://emcrit.org",
-    "category": "education",
+    "category": [
+      "education"
+    ],
     "languages": [
       "en"
     ],
@@ -46,7 +52,9 @@
   {
     "name": "Radiopaedia",
     "url": "https://radiopaedia.org",
-    "category": "clinical",
+    "category": [
+      "clinical"
+    ],
     "languages": [
       "en"
     ],
@@ -60,7 +68,9 @@
   {
     "name": "REBEL EM",
     "url": "https://rebelem.com",
-    "category": "education",
+    "category": [
+      "education"
+    ],
     "languages": [
       "en"
     ],
@@ -74,7 +84,9 @@
   {
     "name": "CoreEM",
     "url": "https://coreem.net",
-    "category": "clinical",
+    "category": [
+      "clinical"
+    ],
     "languages": [
       "en"
     ],
@@ -88,7 +100,9 @@
   {
     "name": "OpenPediatrics",
     "url": "https://www.openpediatrics.org",
-    "category": "education",
+    "category": [
+      "education"
+    ],
     "languages": [
       "en",
       "es",
@@ -106,7 +120,9 @@
   {
     "name": "ClinCalc",
     "url": "https://clincalc.com",
-    "category": "clinical",
+    "category": [
+      "clinical"
+    ],
     "languages": [
       "en"
     ],
@@ -121,7 +137,9 @@
   {
     "name": "Global RPh",
     "url": "https://globalrph.com",
-    "category": "clinical",
+    "category": [
+      "clinical"
+    ],
     "languages": [
       "en"
     ],
@@ -135,7 +153,9 @@
   {
     "name": "NephSIM",
     "url": "https://nephsim.com",
-    "category": "education",
+    "category": [
+      "education"
+    ],
     "languages": [
       "en"
     ],
@@ -150,7 +170,9 @@
   {
     "name": "PulmCCM",
     "url": "https://pulmccm.org",
-    "category": "education",
+    "category": [
+      "education"
+    ],
     "languages": [
       "en"
     ],
@@ -165,7 +187,9 @@
   {
     "name": "Taming the SRU",
     "url": "https://www.tamingthesru.com",
-    "category": "education",
+    "category": [
+      "education"
+    ],
     "languages": [
       "en"
     ],
@@ -180,7 +204,9 @@
   {
     "name": "EM Clerkship",
     "url": "https://www.emclerkship.com",
-    "category": "education",
+    "category": [
+      "education"
+    ],
     "languages": [
       "en"
     ],
@@ -195,7 +221,9 @@
   {
     "name": "Pediatric Emergency Standards",
     "url": "https://www.pedsemergencycare.com",
-    "category": "clinical",
+    "category": [
+      "clinical"
+    ],
     "languages": [
       "en"
     ],
@@ -210,7 +238,9 @@
   {
     "name": "Internet Book of Critical Care (IBCC)",
     "url": "https://emcrit.org/ibcc/toc",
-    "category": "education",
+    "category": [
+      "education"
+    ],
     "languages": [
       "en"
     ],
@@ -225,7 +255,9 @@
   {
     "name": "StatPearls",
     "url": "https://www.ncbi.nlm.nih.gov/books/NBK430685",
-    "category": "education",
+    "category": [
+      "education"
+    ],
     "languages": [
       "en"
     ],
@@ -239,7 +271,9 @@
   {
     "name": "EBM Consult",
     "url": "https://www.ebmconsult.com",
-    "category": "clinical",
+    "category": [
+      "clinical"
+    ],
     "languages": [
       "en"
     ],
@@ -254,7 +288,9 @@
   {
     "name": "Toronto Notes Online",
     "url": "https://torontonotes.ca",
-    "category": "education",
+    "category": [
+      "education"
+    ],
     "languages": [
       "en"
     ],
@@ -268,7 +304,9 @@
   {
     "name": "Amboss (Free Tier)",
     "url": "https://www.amboss.com",
-    "category": "education",
+    "category": [
+      "education"
+    ],
     "languages": [
       "en",
       "de"
@@ -285,7 +323,9 @@
   {
     "name": "The NNT",
     "url": "https://www.thennt.com",
-    "category": "clinical",
+    "category": [
+      "clinical"
+    ],
     "languages": [
       "en"
     ],
@@ -300,7 +340,9 @@
   {
     "name": "Rational Clinical Examination (JAMA)",
     "url": "https://jamanetwork.com/collections/44038/the-rational-clinical-examination",
-    "category": "clinical",
+    "category": [
+      "clinical"
+    ],
     "languages": [
       "en"
     ],
@@ -314,7 +356,9 @@
   {
     "name": "Teach Me Anatomy",
     "url": "https://teachmeanatomy.info",
-    "category": "education",
+    "category": [
+      "education"
+    ],
     "languages": [
       "en"
     ],
@@ -329,7 +373,9 @@
   {
     "name": "Kenhub",
     "url": "https://www.kenhub.com",
-    "category": "education",
+    "category": [
+      "education"
+    ],
     "languages": [
       "en",
       "de",
@@ -346,7 +392,9 @@
   {
     "name": "3D Slicer",
     "url": "https://www.slicer.org",
-    "category": "data",
+    "category": [
+      "data"
+    ],
     "languages": [
       "en"
     ],
@@ -362,7 +410,9 @@
   {
     "name": "OpenMRS",
     "url": "https://openmrs.org",
-    "category": "clinical",
+    "category": [
+      "clinical"
+    ],
     "languages": [
       "en",
       "es",
@@ -381,7 +431,9 @@
   {
     "name": "BlockDocs",
     "url": "https://blockdocs.github.io/",
-    "category": "clinical",
+    "category": [
+      "clinical"
+    ],
     "languages": [
       "en",
       "es"
@@ -397,7 +449,9 @@
   {
     "name": "Coags",
     "url": "https://coags.app/",
-    "category": "clinical",
+    "category": [
+      "clinical"
+    ],
     "languages": [
       "en"
     ],
@@ -412,7 +466,9 @@
   {
     "name": "PEPT – Perioperative Electrophysiology Training Program",
     "url": "https://pept.org/",
-    "category": "education",
+    "category": [
+      "education"
+    ],
     "languages": [
       "en"
     ],
@@ -428,7 +484,9 @@
   {
     "name": "BiliTool",
     "url": "https://bilitool.org/",
-    "category": "clinical",
+    "category": [
+      "clinical"
+    ],
     "languages": [
       "en"
     ],
@@ -443,7 +501,9 @@
   {
     "name": "CodeRunner – ACLS / PALS Companion",
     "url": "https://gavinovsak.github.io/CodeRunner/",
-    "category": "clinical",
+    "category": [
+      "clinical"
+    ],
     "languages": [
       "en"
     ],
@@ -461,7 +521,9 @@
   {
     "name": "PhysioNet",
     "url": "https://physionet.org",
-    "category": "data",
+    "category": [
+      "data"
+    ],
     "languages": [
       "en"
     ],
@@ -482,7 +544,9 @@
   {
     "name": "MIMIC-IV",
     "url": "https://physionet.org/content/mimiciv/latest/",
-    "category": "data",
+    "category": [
+      "data"
+    ],
     "languages": [
       "en"
     ],
@@ -503,7 +567,9 @@
   {
     "name": "NHANES",
     "url": "https://www.cdc.gov/nchs/nhanes/",
-    "category": "data",
+    "category": [
+      "data"
+    ],
     "languages": [
       "en"
     ],
@@ -524,7 +590,9 @@
   {
     "name": "OpenNeuro",
     "url": "https://openneuro.org",
-    "category": "data",
+    "category": [
+      "data"
+    ],
     "languages": [
       "en"
     ],
@@ -546,7 +614,9 @@
   {
     "name": "SEER (NCI)",
     "url": "https://seer.cancer.gov",
-    "category": "data",
+    "category": [
+      "data"
+    ],
     "languages": [
       "en"
     ],
@@ -566,7 +636,9 @@
   {
     "name": "ClinicalTrials.gov",
     "url": "https://clinicaltrials.gov",
-    "category": "data",
+    "category": [
+      "data"
+    ],
     "languages": [
       "en"
     ],

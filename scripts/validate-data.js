@@ -33,8 +33,10 @@ try {
     if (!Array.isArray(app.tags) || !app.tags.every(t => typeof t === 'string'))
       throw new Error(`${p} "tags" must be an array of strings.`);
 
-    if (!app.category || !VALID_CATEGORIES.has(app.category))
-      throw new Error(`${p} "category" is required and must be one of: ${[...VALID_CATEGORIES].join(', ')}.`);
+    if (!Array.isArray(app.category) || app.category.length === 0)
+      throw new Error(`${p} "category" must be a non-empty array.`);
+    if (!app.category.every(c => VALID_CATEGORIES.has(c)))
+      throw new Error(`${p} "category" values must be one of: ${[...VALID_CATEGORIES].join(', ')}.`);
 
     if (!Array.isArray(app.languages) || app.languages.length === 0)
       throw new Error(`${p} "languages" is required and must be a non-empty array.`);

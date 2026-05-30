@@ -19,18 +19,25 @@ export default function EditAppModal({ app, onClose, existingTags }: Props) {
   const [name, setName] = useState(app.name)
   const [url, setUrl] = useState(app.url)
   const [github, setGithub] = useState(app.github ?? '')
-  const [category, setCategory] = useState<AppCategory>(app.category)
+  const [categories, setCategories] = useState<Set<AppCategory>>(new Set(app.category))
   const [languages, setLanguages] = useState<Set<string>>(new Set(app.languages))
   const [tags, setTags] = useState<string[]>(app.tags)
   const [description, setDescription] = useState(app.description ?? '')
   const [reason, setReason] = useState('')
 
-  const isValid = name.trim() && url.trim() && tags.length > 0 && reason.trim()
+  const isValid = name.trim() && url.trim() && categories.size > 0 && tags.length > 0 && reason.trim()
 
   const toggleLang = (code: string) =>
     setLanguages(prev => {
       const next = new Set(prev)
       next.has(code) ? next.delete(code) : next.add(code)
+      return next
+    })
+
+  const toggleCategory = (cat: AppCategory) =>
+    setCategories(prev => {
+      const next = new Set(prev)
+      next.has(cat) ? next.delete(cat) : next.add(cat)
       return next
     })
 
@@ -41,7 +48,7 @@ export default function EditAppModal({ app, onClose, existingTags }: Props) {
     const data: Record<string, unknown> = {
       name: name.trim(),
       url: url.trim(),
-      category,
+      category: [...categories],
       languages: langList,
       tags: tagList,
     }
@@ -59,7 +66,7 @@ export default function EditAppModal({ app, onClose, existingTags }: Props) {
       '',
       `**Name:** ${name.trim()}`,
       `**URL:** ${url.trim()}`,
-      `**Category:** ${category}`,
+      `**Category:** ${[...categories].join(', ')}`,
       `**Languages:** ${langList.join(', ')}`,
       `**Tags:** ${tagList.join(', ')}`,
     ]
@@ -113,15 +120,15 @@ export default function EditAppModal({ app, onClose, existingTags }: Props) {
             <input className={inputCls} value={github} onChange={e => setGithub(e.target.value)} placeholder="owner/repo" />
           </Field>
 
-          <Field label="Category" required>
+          <Field label="Category" required hint="select all that apply">
             <div className="flex gap-2">
               {(['clinical', 'education', 'data'] as AppCategory[]).map(cat => (
                 <button
                   key={cat}
                   type="button"
-                  onClick={() => setCategory(cat)}
+                  onClick={() => toggleCategory(cat)}
                   className={`flex-1 py-1.5 rounded-lg border text-xs font-medium transition-colors ${
-                    category === cat
+                    categories.has(cat)
                       ? 'bg-blue-600 border-blue-600 text-white'
                       : 'border-gray-200 text-gray-500 hover:border-gray-300'
                   }`}

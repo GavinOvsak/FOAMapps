@@ -130,7 +130,9 @@ function AppInner({ languagePrefs, onSaveLanguagePrefs }: AppInnerProps) {
         setApps(
           data.map((app) => ({
             ...app,
-            category: app.category ?? "clinical",
+            category: Array.isArray(app.category)
+              ? app.category
+              : [app.category ?? "clinical"],
             languages: app.languages ?? ["en"],
           }))
         );
@@ -178,7 +180,7 @@ function AppInner({ languagePrefs, onSaveLanguagePrefs }: AppInnerProps) {
 
   const categoryFilteredApps = useMemo(() => {
     if (activeCategory === "all") return apps;
-    return apps.filter((app) => app.category === activeCategory);
+    return apps.filter((app) => app.category.includes(activeCategory));
   }, [apps, activeCategory]);
 
   const allTags = useMemo(() => {
@@ -221,8 +223,9 @@ function AppInner({ languagePrefs, onSaveLanguagePrefs }: AppInnerProps) {
   const categoryCounts = useMemo(() => {
     const counts = { all: apps.length, clinical: 0, education: 0, data: 0 };
     apps.forEach((app) => {
-      if (app.category in counts)
-        (counts as Record<string, number>)[app.category]++;
+      app.category.forEach((cat) => {
+        if (cat in counts) (counts as Record<string, number>)[cat]++;
+      });
     });
     return counts;
   }, [apps]);

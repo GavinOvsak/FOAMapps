@@ -5,7 +5,7 @@ export interface App {
   name: string
   url: string
   tags: string[]
-  category: AppCategory
+  category: AppCategory[]
   languages: string[]       // ISO 639-1 codes, e.g. ["en", "es"]
   github?: string           // "owner/repo" format
   description?: string
