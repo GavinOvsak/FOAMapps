@@ -1,0 +1,39 @@
+name: Edit an Existing App
+description: Suggest a correction or update to an existing app listing
+title: "[Edit App] "
+labels: ["edit-app"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Use the **Suggest Edit** button inside the app to pre-fill this form automatically.
+        Manual edits are also welcome — include the machine-readable block below if applying changes via automation.
+
+  - type: input
+    id: app_name
+    attributes:
+      label: App Name
+      description: Name of the app you want to edit
+      placeholder: e.g. MDCalc
+    validations:
+      required: true
+
+  - type: input
+    id: app_url
+    attributes:
+      label: Current App URL
+      description: The existing URL of the app in the directory (used to identify it)
+      placeholder: https://www.example.com
+    validations:
+      required: true
+
+  - type: textarea
+    id: changes
+    attributes:
+      label: Proposed Changes
+      description: Describe what should change and why
+      placeholder: |
+        URL changed to https://new-url.com
+        Added Spanish language support
+    validations:
+      required: true

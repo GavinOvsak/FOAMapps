@@ -1,0 +1,45 @@
+name: Request App Removal
+description: Request removal of an app that no longer belongs in the directory
+title: "[Remove App] "
+labels: ["delete-app"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Use the **Request Removal** button inside the app to pre-fill this form automatically.
+
+  - type: input
+    id: app_name
+    attributes:
+      label: App Name
+      placeholder: e.g. MDCalc
+    validations:
+      required: true
+
+  - type: input
+    id: app_url
+    attributes:
+      label: App URL
+      description: The URL of the app in the directory
+      placeholder: https://www.example.com
+    validations:
+      required: true
+
+  - type: dropdown
+    id: reason
+    attributes:
+      label: Reason for removal
+      options:
+        - App is no longer free / paywalled
+        - URL is dead or unreachable
+        - Duplicate of another listing
+        - No longer maintained / abandoned
+        - Other
+    validations:
+      required: true
+
+  - type: textarea
+    id: details
+    attributes:
+      label: Additional details
+      placeholder: Any extra context that supports the removal request

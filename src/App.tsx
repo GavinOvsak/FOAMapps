@@ -12,6 +12,9 @@ import CategoryTabs from "./components/CategoryTabs";
 import InfoModal from "./components/InfoModal";
 import AccountModal from "./components/AccountModal";
 import AppDetailModal from "./components/AppDetailModal";
+import SubmitAppModal from "./components/SubmitAppModal";
+import EditAppModal from "./components/EditAppModal";
+import DeleteAppModal from "./components/DeleteAppModal";
 
 const SUBMIT_EMAIL = "ovsak.gavin@gmail.com";
 const USERNAME_KEY = "foamapps_github_username";
@@ -92,7 +95,10 @@ function AppInner({ languagePrefs, onSaveLanguagePrefs }: AppInnerProps) {
   const [activeCategory, setActiveCategory] = useState<CategoryOrAll>("all");
   const [showInfoModal, setShowInfoModal] = useState(false);
   const [showAccountModal, setShowAccountModal] = useState(false);
+  const [showSubmitModal, setShowSubmitModal] = useState(false);
   const [selectedApp, setSelectedApp] = useState<App | null>(null);
+  const [editingApp, setEditingApp] = useState<App | null>(null);
+  const [deletingApp, setDeletingApp] = useState<App | null>(null);
   const [githubUsername, setGithubUsername] = useState(() =>
     load(USERNAME_KEY, "", (v) => v)
   );
@@ -354,6 +360,17 @@ function AppInner({ languagePrefs, onSaveLanguagePrefs }: AppInnerProps) {
                 {t.githubRateLimit}
               </span>
             )}
+
+            <button
+              onClick={() => setShowSubmitModal(true)}
+              title="Submit an app"
+              className="flex items-center gap-1.5 text-sm font-medium px-3 py-1.5 rounded-lg bg-blue-600 text-white hover:bg-blue-700 transition-colors"
+            >
+              <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 4v16m8-8H4" />
+              </svg>
+              <span className="hidden sm:inline">Submit App</span>
+            </button>
 
             <button
               onClick={toggleMyStarFilter}
@@ -633,7 +650,18 @@ function AppInner({ languagePrefs, onSaveLanguagePrefs }: AppInnerProps) {
         <AppDetailModal
           app={selectedApp}
           onClose={() => setSelectedApp(null)}
+          onSuggestEdit={() => { setEditingApp(selectedApp); setSelectedApp(null); }}
+          onRequestRemoval={() => { setDeletingApp(selectedApp); setSelectedApp(null); }}
         />
+      )}
+      {showSubmitModal && (
+        <SubmitAppModal onClose={() => setShowSubmitModal(false)} />
+      )}
+      {editingApp && (
+        <EditAppModal app={editingApp} onClose={() => setEditingApp(null)} />
+      )}
+      {deletingApp && (
+        <DeleteAppModal app={deletingApp} onClose={() => setDeletingApp(null)} />
       )}
     </div>
   );
