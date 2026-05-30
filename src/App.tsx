@@ -1,6 +1,9 @@
 import { useState, useEffect, useMemo } from "react";
 import type { App, AppCategory } from "./types";
 import { useGitHubData } from "./hooks/useGitHubData";
+import { LANGUAGE_NAMES } from "./constants";
+import { getUiLanguage, SUPPORTED_UI_LANGUAGES } from "./i18n";
+import { TranslationProvider, useT } from "./TranslationContext";
 import AppCard from "./components/AppCard";
 import SearchBar from "./components/SearchBar";
 import TagFilter from "./components/TagFilter";
@@ -48,18 +51,32 @@ function parseStarCount(s: string | undefined): number {
   return parseFloat(s);
 }
 
-function getBrowserLanguages(): Set<string> {
+function getBrowserLanguages(): string[] {
   try {
     const langs = navigator.languages?.length
       ? navigator.languages
       : [navigator.language ?? "en"];
-    return new Set(langs.map((l) => l.split("-")[0].toLowerCase()));
+    return [...new Set(langs.map((l) => l.split("-")[0].toLowerCase()))];
   } catch {
-    return new Set(["en"]);
+    return ["en"];
   }
 }
 
-export default function App() {
+// All languages available for selection: supported UI langs + any known language from data
+function buildAvailableLanguages(dataLanguages: string[]): string[] {
+  const known = new Set(Object.keys(LANGUAGE_NAMES));
+  const all = new Set([...SUPPORTED_UI_LANGUAGES, ...dataLanguages]);
+  return [...all].filter((c) => known.has(c)).sort((a, b) => {
+    // UI-supported languages first, then alphabetical by name
+    const aUI = (SUPPORTED_UI_LANGUAGES as readonly string[]).includes(a);
+    const bUI = (SUPPORTED_UI_LANGUAGES as readonly string[]).includes(b);
+    if (aUI !== bUI) return aUI ? -1 : 1;
+    return (LANGUAGE_NAMES[a] ?? a).localeCompare(LANGUAGE_NAMES[b] ?? b);
+  });
+}
+
+function AppInner() {
+  const t = useT();
   const [apps, setApps] = useState<App[]>([]);
   const [loadingApps, setLoadingApps] = useState(true);
   const [search, setSearch] = useState("");
@@ -91,20 +108,24 @@ export default function App() {
   const { repoStars, userStarred, loadingUserStars, rateLimited } =
     useGitHubData(apps, githubUsername);
 
-  // Browser language auto-detection (for sort boost when no prefs set)
   const browserLanguages = useMemo(() => getBrowserLanguages(), []);
 
-  // Effective language preference: explicit prefs > browser detection
-  const effectiveLanguages = useMemo<Set<string>>(() => {
-    if (languagePrefs.length > 0) return new Set(languagePrefs);
-    return browserLanguages;
+  const effectiveLanguages = useMemo<string[]>(() => {
+    return languagePrefs.length > 0 ? languagePrefs : browserLanguages;
   }, [languagePrefs, browserLanguages]);
 
   useEffect(() => {
     fetch(`${import.meta.env.BASE_URL}data/apps.json`)
       .then((r) => r.json())
       .then((data: App[]) => {
-        setApps(data);
+        // Defensive defaults for data missing the new fields (e.g. browser-cached old JSON)
+        setApps(
+          data.map((app) => ({
+            ...app,
+            category: app.category ?? "clinical",
+            languages: app.languages ?? ["en"],
+          }))
+        );
         setLoadingApps(false);
       })
       .catch(() => setLoadingApps(false));
@@ -147,13 +168,11 @@ export default function App() {
       return next;
     });
 
-  // Apps filtered to the active category (base for tags + language counts)
   const categoryFilteredApps = useMemo(() => {
     if (activeCategory === "all") return apps;
     return apps.filter((app) => app.category === activeCategory);
   }, [apps, activeCategory]);
 
-  // Tag counts derived from category-scoped apps
   const allTags = useMemo(() => {
     const counts: Record<string, number> = {};
     categoryFilteredApps.forEach((app) =>
@@ -166,7 +185,6 @@ export default function App() {
       .sort((a, b) => b.count - a.count || a.name.localeCompare(b.name));
   }, [categoryFilteredApps]);
 
-  // Language counts derived from category-scoped apps
   const allLanguages = useMemo(() => {
     const counts: Record<string, number> = {};
     categoryFilteredApps.forEach((app) =>
@@ -179,12 +197,17 @@ export default function App() {
       .sort((a, b) => b.count - a.count);
   }, [categoryFilteredApps]);
 
-  // Category counts for the tabs
+  // Combined language list for the Account modal (UI langs + data langs)
+  const allAvailableLanguageCodes = useMemo(() => {
+    const dataLangs = apps.flatMap((a) => a.languages);
+    return buildAvailableLanguages(dataLangs);
+  }, [apps]);
+
   const categoryCounts = useMemo(() => {
     const counts = { all: apps.length, clinical: 0, education: 0, data: 0 };
     apps.forEach((app) => {
       if (app.category in counts)
-        counts[app.category as AppCategory]++;
+        (counts as Record<string, number>)[app.category]++;
     });
     return counts;
   }, [apps]);
@@ -220,19 +243,21 @@ export default function App() {
           if (!localStarred.has(app.url)) return false;
         }
       }
-      if (activeLanguages.size > 0 && !app.languages.some((l) => activeLanguages.has(l)))
+      if (
+        activeLanguages.size > 0 &&
+        !app.languages.some((l) => activeLanguages.has(l))
+      )
         return false;
       if (activeTags.size > 0 && !app.tags.some((t) => activeTags.has(t)))
         return false;
       if (q) {
         const inName = app.name.toLowerCase().includes(q);
-        const inTags = app.tags.some((t) => t.toLowerCase().includes(q));
+        const inTags = app.tags.some((tg) => tg.toLowerCase().includes(q));
         if (!inName && !inTags) return false;
       }
       return true;
     });
 
-    // Base sort
     if (sort === "date-asc") {
       result = [...result].sort((a, b) =>
         (a.dateAdded ?? "").localeCompare(b.dateAdded ?? "")
@@ -255,21 +280,20 @@ export default function App() {
       );
     }
 
-    // Language boost: apps matching user's preferred languages float up,
-    // but only when not already filtering by language (filter already handles it)
+    // Language boost when not explicitly filtering by language
     if (activeLanguages.size === 0) {
-      const preferredLangs = effectiveLanguages;
-      const hasNonEnglishPref = [...preferredLangs].some((l) => l !== "en");
-      if (hasNonEnglishPref) {
+      const preferred = new Set(effectiveLanguages);
+      const hasNonEnglish = effectiveLanguages.some((l) => l !== "en");
+      if (hasNonEnglish) {
         result = [...result].sort((a, b) => {
-          const aM = a.languages.some((l) => preferredLangs.has(l));
-          const bM = b.languages.some((l) => preferredLangs.has(l));
+          const aM = a.languages.some((l) => preferred.has(l));
+          const bM = b.languages.some((l) => preferred.has(l));
           return Number(bM) - Number(aM);
         });
       }
     }
 
-    // Starred always float to top (stable — preserves sort within each group)
+    // Starred always float to top (stable)
     result = [...result].sort((a, b) => {
       const aStarred = !!(a.github
         ? userStarred.has(a.github)
@@ -298,18 +322,17 @@ export default function App() {
   const activeFilterCount = activeTags.size + activeLanguages.size;
 
   const SORT_OPTIONS: { value: SortOption; label: string }[] = [
-    { value: "default", label: "Default" },
-    { value: "date-desc", label: "Newest first" },
-    { value: "date-asc", label: "Oldest first" },
-    { value: "stars-desc", label: "Most stars" },
-    { value: "stars-asc", label: "Fewest stars" },
+    { value: "default", label: t.sortDefault },
+    { value: "date-desc", label: t.sortNewest },
+    { value: "date-asc", label: t.sortOldest },
+    { value: "stars-desc", label: t.sortMostStars },
+    { value: "stars-asc", label: t.sortFewestStars },
   ];
 
   return (
     <div className="flex flex-col h-screen h-dvh bg-slate-50">
-      {/* Header */}
       <header className="bg-white border-b border-gray-100 shadow-sm z-40 shrink-0">
-        {/* Top row: branding + actions */}
+        {/* Top row */}
         <div className="max-w-6xl mx-auto px-4 pt-3 pb-2 flex items-center justify-between gap-3">
           <div className="flex items-center gap-2.5">
             <span className="text-xl">⚕️</span>
@@ -318,7 +341,7 @@ export default function App() {
                 FOAM Apps
               </h1>
               <p className="text-xs text-gray-400 leading-none mt-0.5">
-                Free Open Access Medical Apps
+                {t.appSubtitle}
               </p>
             </div>
           </div>
@@ -326,14 +349,13 @@ export default function App() {
           <div className="flex items-center gap-2">
             {rateLimited && (
               <span className="hidden sm:inline-flex items-center text-xs text-amber-600 bg-amber-50 border border-amber-200 px-2 py-1 rounded-full">
-                GitHub rate limit reached
+                {t.githubRateLimit}
               </span>
             )}
 
-            {/* My Stars toggle */}
             <button
               onClick={toggleMyStarFilter}
-              title="Filter by My Stars"
+              title={t.myStars}
               className={`flex items-center gap-1.5 text-sm font-medium px-3 py-1.5 rounded-lg transition-colors ${
                 myStarFilter
                   ? "bg-amber-100 text-amber-700 hover:bg-amber-200"
@@ -349,7 +371,7 @@ export default function App() {
               >
                 <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
               </svg>
-              <span className="hidden sm:inline">My Stars</span>
+              <span className="hidden sm:inline">{t.myStars}</span>
               {loadingUserStars && (
                 <svg
                   className="w-3 h-3 animate-spin text-gray-400"
@@ -373,26 +395,39 @@ export default function App() {
               )}
             </button>
 
-            {/* Account button (GitHub + language prefs) */}
             <button
               onClick={() => setShowAccountModal(true)}
-              title={githubUsername ? `Account (@${githubUsername})` : "Account"}
+              title={
+                githubUsername
+                  ? `${t.account} (@${githubUsername})`
+                  : t.account
+              }
               className="flex items-center gap-1.5 text-xs text-gray-400 hover:text-gray-600 px-2 py-1.5 rounded-lg hover:bg-gray-100 transition-colors"
             >
-              <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
+              <svg
+                className="w-4 h-4"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth={2}
+                  d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"
+                />
               </svg>
               {githubUsername && (
                 <span className="hidden sm:inline">@{githubUsername}</span>
               )}
               {languagePrefs.length > 0 && (
                 <span className="text-violet-500 font-medium hidden sm:inline">
-                  · {languagePrefs.length} lang{languagePrefs.length > 1 ? "s" : ""}
+                  · {languagePrefs.length} lang
+                  {languagePrefs.length > 1 ? "s" : ""}
                 </span>
               )}
             </button>
 
-            {/* Info button */}
             <button
               onClick={() => setShowInfoModal(true)}
               className="flex items-center justify-center w-8 h-8 rounded-full text-gray-400 hover:text-gray-600 hover:bg-gray-100 transition-colors"
@@ -422,7 +457,7 @@ export default function App() {
           </div>
           <button
             onClick={() => setShowFilters((v) => !v)}
-            title="Toggle filters"
+            title={t.filterBtn}
             className={`flex items-center gap-1.5 shrink-0 text-sm font-medium px-3 py-2.5 rounded-xl border transition-colors ${
               showFilters || activeFilterCount > 0
                 ? "bg-blue-50 border-blue-200 text-blue-700"
@@ -442,7 +477,7 @@ export default function App() {
                 d="M3 4a1 1 0 011-1h16a1 1 0 011 1v2a1 1 0 01-.293.707L13 13.414V19a1 1 0 01-.553.894l-4 2A1 1 0 017 21v-7.586L3.293 6.707A1 1 0 013 6V4z"
               />
             </svg>
-            <span className="hidden sm:inline">Filter</span>
+            <span className="hidden sm:inline">{t.filterBtn}</span>
             {activeFilterCount > 0 && (
               <span className="bg-blue-600 text-white text-xs rounded-full w-4 h-4 flex items-center justify-center leading-none">
                 {activeFilterCount}
@@ -483,18 +518,17 @@ export default function App() {
         )}
       </header>
 
-      {/* Scrollable content area */}
+      {/* Scrollable content */}
       <div className="flex-1 overflow-y-auto">
         <main className="max-w-6xl mx-auto px-4 py-6 space-y-4">
-          {/* Results count + sort */}
           <div className="flex items-center justify-between gap-2">
             <div className="text-xs text-gray-400">
               {loadingApps
-                ? "Loading apps…"
-                : `${filtered.length} of ${apps.length} apps`}
+                ? t.loadingApps
+                : t.appsCount(filtered.length, apps.length)}
               {myStarFilter && (
                 <span className="ml-1 text-amber-600 font-medium">
-                  · filtered by your stars
+                  {t.filteredByStars}
                 </span>
               )}
             </div>
@@ -511,7 +545,6 @@ export default function App() {
             </select>
           </div>
 
-          {/* Grid */}
           {loadingApps ? (
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
               {Array.from({ length: 6 }).map((_, i) => (
@@ -524,7 +557,7 @@ export default function App() {
           ) : filtered.length === 0 ? (
             <div className="text-center py-16 text-gray-400">
               <p className="text-4xl mb-3">🔍</p>
-              <p className="text-sm">No apps match your filters.</p>
+              <p className="text-sm">{t.noAppsMatch}</p>
               <button
                 onClick={() => {
                   setSearch("");
@@ -536,7 +569,7 @@ export default function App() {
                 }}
                 className="mt-2 text-sm text-blue-500 underline"
               >
-                Clear all filters
+                {t.clearAllFilters}
               </button>
             </div>
           ) : (
@@ -558,7 +591,6 @@ export default function App() {
           )}
         </main>
 
-        {/* Footer */}
         <footer className="text-center text-xs text-gray-300 py-8 max-w-6xl mx-auto w-full">
           <a
             href="https://github.com/GavinOvsak/FOAMapps"
@@ -573,12 +605,11 @@ export default function App() {
             href={`mailto:${SUBMIT_EMAIL}`}
             className="hover:text-gray-500 transition-colors"
           >
-            Submit an app
+            {t.submitAnApp}
           </a>
         </footer>
       </div>
 
-      {/* Modals */}
       {showInfoModal && (
         <InfoModal
           onClose={() => setShowInfoModal(false)}
@@ -591,7 +622,7 @@ export default function App() {
           onSaveUsername={handleSetUsername}
           languagePrefs={languagePrefs}
           onSaveLanguagePrefs={handleSaveLanguagePrefs}
-          availableLanguages={allLanguages.map((l) => l.code)}
+          availableLanguages={allAvailableLanguageCodes}
           loadingStars={loadingUserStars}
           onClose={() => setShowAccountModal(false)}
         />
@@ -603,5 +634,26 @@ export default function App() {
         />
       )}
     </div>
+  );
+}
+
+export default function App() {
+  const [languagePrefs] = useState<string[]>(() => {
+    try {
+      const raw = localStorage.getItem("foamapps_language_prefs");
+      return raw ? (JSON.parse(raw) as string[]) : [];
+    } catch {
+      return [];
+    }
+  });
+
+  const browserLanguages = useMemo(() => getBrowserLanguages(), []);
+  const effectiveLanguages = languagePrefs.length > 0 ? languagePrefs : browserLanguages;
+  const uiLanguage = getUiLanguage(effectiveLanguages);
+
+  return (
+    <TranslationProvider lang={uiLanguage}>
+      <AppInner />
+    </TranslationProvider>
   );
 }

@@ -1,3 +1,4 @@
+import { useT } from '../TranslationContext'
 import { LANGUAGE_NAMES, LANGUAGE_FLAGS } from '../constants'
 
 export interface LangInfo {
@@ -13,11 +14,12 @@ interface Props {
 }
 
 export default function LanguageFilter({ languages, activeLanguages, onToggle, onClear }: Props) {
+  const t = useT()
   if (languages.length <= 1) return null
 
   return (
     <div className="flex items-center gap-2 flex-wrap">
-      <span className="text-xs font-medium text-gray-500 shrink-0">Language:</span>
+      <span className="text-xs font-medium text-gray-500 shrink-0">{t.languageFilterLabel}</span>
       <div className="flex gap-1.5 flex-wrap">
         {languages.map(({ code, count }) => {
           const isActive = activeLanguages.has(code)
@@ -51,7 +53,7 @@ export default function LanguageFilter({ languages, activeLanguages, onToggle, o
           onClick={onClear}
           className="text-xs text-gray-400 hover:text-gray-600 underline ml-1"
         >
-          Clear
+          {t.clearFilter}
         </button>
       )}
     </div>

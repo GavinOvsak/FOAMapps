@@ -1,5 +1,6 @@
 import type { App } from '../types'
 import { LANGUAGE_NAMES, LANGUAGE_FLAGS, CATEGORY_META, ACCESS_META } from '../constants'
+import { useT } from '../TranslationContext'
 
 interface Props {
   app: App
@@ -8,10 +9,12 @@ interface Props {
 
 function formatDate(iso: string): string {
   const d = new Date(iso + 'T00:00:00')
-  return d.toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' })
+  return d.toLocaleDateString(undefined, { year: 'numeric', month: 'long', day: 'numeric' })
 }
 
 export default function AppDetailModal({ app, onClose }: Props) {
+  const t = useT()
+
   return (
     <div
       className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/40 backdrop-blur-sm"
@@ -39,26 +42,21 @@ export default function AppDetailModal({ app, onClose }: Props) {
 
         <dl className="space-y-2.5">
           <div>
-            <dt className="text-xs font-medium text-gray-400 uppercase tracking-wide mb-0.5">Website</dt>
+            <dt className="text-xs font-medium text-gray-400 uppercase tracking-wide mb-0.5">{t.website}</dt>
             <dd>
-              <a
-                href={app.url}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="text-blue-600 hover:underline break-all"
-              >
+              <a href={app.url} target="_blank" rel="noopener noreferrer" className="text-blue-600 hover:underline break-all">
                 {app.url}
               </a>
             </dd>
           </div>
 
           <div>
-            <dt className="text-xs font-medium text-gray-400 uppercase tracking-wide mb-0.5">Category</dt>
+            <dt className="text-xs font-medium text-gray-400 uppercase tracking-wide mb-0.5">{t.categoryLabel}</dt>
             <dd className="text-gray-600">{CATEGORY_META[app.category].label}</dd>
           </div>
 
           <div>
-            <dt className="text-xs font-medium text-gray-400 uppercase tracking-wide mb-0.5">Languages</dt>
+            <dt className="text-xs font-medium text-gray-400 uppercase tracking-wide mb-0.5">{t.languagesLabel}</dt>
             <dd className="flex flex-wrap gap-1.5">
               {app.languages.map(code => (
                 <span key={code} className="inline-flex items-center gap-1 text-xs bg-violet-50 text-violet-800 px-2 py-0.5 rounded-full">
@@ -71,10 +69,10 @@ export default function AppDetailModal({ app, onClose }: Props) {
 
           {app.access && (
             <div>
-              <dt className="text-xs font-medium text-gray-400 uppercase tracking-wide mb-0.5">Access</dt>
+              <dt className="text-xs font-medium text-gray-400 uppercase tracking-wide mb-0.5">{t.accessLabel}</dt>
               <dd>
                 <span className={`inline-flex text-xs font-medium px-2 py-0.5 rounded-full ${ACCESS_META[app.access].color}`}>
-                  {ACCESS_META[app.access].label}
+                  {app.access === 'open' ? t.openAccess : t.credentialedAccess}
                 </span>
               </dd>
             </div>
@@ -82,7 +80,7 @@ export default function AppDetailModal({ app, onClose }: Props) {
 
           {app.dataType && app.dataType.length > 0 && (
             <div>
-              <dt className="text-xs font-medium text-gray-400 uppercase tracking-wide mb-0.5">Data Types</dt>
+              <dt className="text-xs font-medium text-gray-400 uppercase tracking-wide mb-0.5">{t.dataTypesLabel}</dt>
               <dd className="flex flex-wrap gap-1.5">
                 {app.dataType.map(dt => (
                   <span key={dt} className="text-xs bg-gray-100 text-gray-600 px-2 py-0.5 rounded-full">{dt}</span>
@@ -95,12 +93,7 @@ export default function AppDetailModal({ app, onClose }: Props) {
             <div>
               <dt className="text-xs font-medium text-gray-400 uppercase tracking-wide mb-0.5">GitHub</dt>
               <dd>
-                <a
-                  href={`https://github.com/${app.github}`}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="text-blue-600 hover:underline break-all"
-                >
+                <a href={`https://github.com/${app.github}`} target="_blank" rel="noopener noreferrer" className="text-blue-600 hover:underline break-all">
                   {`https://github.com/${app.github}`}
                 </a>
               </dd>
@@ -109,7 +102,7 @@ export default function AppDetailModal({ app, onClose }: Props) {
 
           {app.dateAdded && (
             <div>
-              <dt className="text-xs font-medium text-gray-400 uppercase tracking-wide mb-0.5">Added</dt>
+              <dt className="text-xs font-medium text-gray-400 uppercase tracking-wide mb-0.5">{t.addedLabel}</dt>
               <dd className="text-gray-600">{formatDate(app.dateAdded)}</dd>
             </div>
           )}
