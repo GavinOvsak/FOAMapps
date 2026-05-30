@@ -1,3 +1,5 @@
+import { useT } from '../TranslationContext'
+
 const TAG_COLORS: Record<string, string> = {}
 const PALETTE: [string, string][] = [
   ['bg-blue-100 text-blue-800', 'bg-blue-600 text-white'],
@@ -18,8 +20,7 @@ function getColors(tag: string): [string, string] {
     for (const c of tag) h = (h * 31 + c.charCodeAt(0)) % PALETTE.length
     TAG_COLORS[tag] = String(h)
   }
-  const idx = parseInt(TAG_COLORS[tag])
-  return PALETTE[idx]
+  return PALETTE[parseInt(TAG_COLORS[tag])]
 }
 
 export interface TagInfo {
@@ -35,11 +36,12 @@ interface Props {
 }
 
 export default function TagFilter({ allTags, activeTags, onToggle, onClear }: Props) {
+  const t = useT()
   if (allTags.length === 0) return null
 
   return (
     <div className="flex items-center gap-2 flex-wrap">
-      <span className="text-xs font-medium text-gray-500 shrink-0">Filter:</span>
+      <span className="text-xs font-medium text-gray-500 shrink-0">{t.tagFilterLabel}</span>
       <div className="flex gap-1.5 flex-wrap">
         {allTags.map(tag => {
           const [inactive, active] = getColors(tag.name)
@@ -69,7 +71,7 @@ export default function TagFilter({ allTags, activeTags, onToggle, onClear }: Pr
           onClick={onClear}
           className="text-xs text-gray-400 hover:text-gray-600 underline ml-1"
         >
-          Clear
+          {t.clearFilter}
         </button>
       )}
     </div>

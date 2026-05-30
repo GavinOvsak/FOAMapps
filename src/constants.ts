@@ -7,6 +7,7 @@ export const LANGUAGE_NAMES: Record<string, string> = {
   es: 'Spanish',
   fr: 'French',
   hi: 'Hindi',
+  id: 'Indonesian',
   it: 'Italian',
   ja: 'Japanese',
   ko: 'Korean',
@@ -16,6 +17,7 @@ export const LANGUAGE_NAMES: Record<string, string> = {
   ru: 'Russian',
   sw: 'Swahili',
   tr: 'Turkish',
+  vi: 'Vietnamese',
   zh: 'Chinese',
 }
 
@@ -26,6 +28,7 @@ export const LANGUAGE_FLAGS: Record<string, string> = {
   es: '🇪🇸',
   fr: '🇫🇷',
   hi: '🇮🇳',
+  id: '🇮🇩',
   it: '🇮🇹',
   ja: '🇯🇵',
   ko: '🇰🇷',
@@ -35,6 +38,7 @@ export const LANGUAGE_FLAGS: Record<string, string> = {
   ru: '🇷🇺',
   sw: '🇰🇪',
   tr: '🇹🇷',
+  vi: '🇻🇳',
   zh: '🇨🇳',
 }
 

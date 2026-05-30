@@ -1,5 +1,5 @@
 import type { AppCategory } from '../types'
-import { CATEGORY_META } from '../constants'
+import { useT } from '../TranslationContext'
 
 type CategoryOrAll = AppCategory | 'all'
 
@@ -9,14 +9,16 @@ interface Props {
   counts: Record<CategoryOrAll, number>
 }
 
-const TABS: { id: CategoryOrAll; label: string }[] = [
-  { id: 'all', label: 'All' },
-  { id: 'clinical', label: CATEGORY_META.clinical.label },
-  { id: 'education', label: CATEGORY_META.education.label },
-  { id: 'data', label: CATEGORY_META.data.label },
-]
-
 export default function CategoryTabs({ active, onChange, counts }: Props) {
+  const t = useT()
+
+  const TABS: { id: CategoryOrAll; label: string }[] = [
+    { id: 'all', label: t.catAll },
+    { id: 'clinical', label: t.catClinical },
+    { id: 'education', label: t.catEducation },
+    { id: 'data', label: t.catData },
+  ]
+
   return (
     <div className="flex gap-1 overflow-x-auto scrollbar-hide pb-0.5">
       {TABS.map(tab => {

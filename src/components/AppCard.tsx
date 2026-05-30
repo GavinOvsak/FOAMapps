@@ -1,5 +1,6 @@
 import type { App } from '../types'
 import { LANGUAGE_FLAGS, ACCESS_META } from '../constants'
+import { useT } from '../TranslationContext'
 
 const TAG_COLORS = [
   'bg-blue-100 text-blue-800',
@@ -34,8 +35,10 @@ interface Props {
 export default function AppCard({
   app, stars, isUserStarred, isLocalStarred, onToggleLocalStar, onOpenDetail, activeTag, onTagClick,
 }: Props) {
+  const t = useT()
   const nonEnglishLangs = app.languages.filter(l => l !== 'en')
   const isDataApp = app.category === 'data'
+  const accessMeta = app.access ? ACCESS_META[app.access] : null
 
   return (
     <div
@@ -47,9 +50,9 @@ export default function AppCard({
         <div className="flex items-center gap-1.5 min-w-0">
           <button
             onClick={e => { e.stopPropagation(); onOpenDetail() }}
-            title="More info"
+            title={t.moreInfo}
             className="shrink-0 text-gray-300 hover:text-blue-400 transition-colors"
-            aria-label="More info"
+            aria-label={t.moreInfo}
           >
             <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
@@ -58,7 +61,6 @@ export default function AppCard({
           <h2 className="text-base font-semibold text-gray-900 leading-snug">{app.name}</h2>
         </div>
 
-        {/* Star badge (GitHub) or local star toggle */}
         {app.github ? (
           <div className="flex items-center gap-1 shrink-0">
             {stars !== undefined ? (
@@ -84,7 +86,7 @@ export default function AppCard({
         ) : (
           <button
             onClick={e => { e.stopPropagation(); onToggleLocalStar() }}
-            title={isLocalStarred ? 'Remove from My Stars' : 'Add to My Stars'}
+            title={isLocalStarred ? t.removeFromMyStars : t.addToMyStars}
             className={`shrink-0 p-0.5 rounded transition-colors ${
               isLocalStarred ? 'text-amber-400 hover:text-amber-500' : 'text-gray-400 hover:text-amber-300'
             }`}
@@ -113,9 +115,11 @@ export default function AppCard({
           </button>
         ))}
 
-        {/* Language flags for multilingual apps */}
         {nonEnglishLangs.length > 0 && (
-          <span className="flex items-center gap-0.5 text-xs text-gray-400 ml-0.5" title={`Also available in: ${nonEnglishLangs.join(', ')}`}>
+          <span
+            className="flex items-center gap-0.5 text-xs text-gray-400 ml-0.5"
+            title={nonEnglishLangs.join(', ')}
+          >
             {nonEnglishLangs.map(l => (
               <span key={l} className="text-sm leading-none" role="img" aria-label={l}>
                 {LANGUAGE_FLAGS[l] ?? '🌐'}
@@ -124,10 +128,9 @@ export default function AppCard({
           </span>
         )}
 
-        {/* Access badge for data apps */}
-        {isDataApp && app.access && (
-          <span className={`text-xs font-medium px-2 py-0.5 rounded-full ${ACCESS_META[app.access].color}`}>
-            {ACCESS_META[app.access].label}
+        {isDataApp && accessMeta && (
+          <span className={`text-xs font-medium px-2 py-0.5 rounded-full ${accessMeta.color}`}>
+            {app.access === 'open' ? t.openAccess : t.credentialedAccess}
           </span>
         )}
       </div>
@@ -141,7 +144,7 @@ export default function AppCard({
           onClick={e => e.stopPropagation()}
           className="flex-1 text-center text-sm font-medium bg-blue-600 hover:bg-blue-700 text-white px-3 py-1.5 rounded-lg transition-colors"
         >
-          {isDataApp ? 'Access Data' : 'Open App'}
+          {isDataApp ? t.accessData : t.openApp}
         </a>
         {app.github && (
           <a
@@ -149,7 +152,7 @@ export default function AppCard({
             target="_blank"
             rel="noopener noreferrer"
             onClick={e => e.stopPropagation()}
-            title="View source code"
+            title="GitHub"
             className="flex items-center justify-center text-sm font-mono font-semibold bg-gray-100 hover:bg-gray-200 text-gray-700 px-3 py-1.5 rounded-lg transition-colors"
           >
             {'</>'}
