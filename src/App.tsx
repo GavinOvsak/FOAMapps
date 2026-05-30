@@ -1,11 +1,13 @@
 import { useState, useEffect, useMemo } from "react";
-import type { App } from "./types";
+import type { App, AppCategory } from "./types";
 import { useGitHubData } from "./hooks/useGitHubData";
 import AppCard from "./components/AppCard";
 import SearchBar from "./components/SearchBar";
 import TagFilter from "./components/TagFilter";
+import LanguageFilter from "./components/LanguageFilter";
+import CategoryTabs from "./components/CategoryTabs";
 import InfoModal from "./components/InfoModal";
-import MyStarsModal from "./components/MyStarsModal";
+import AccountModal from "./components/AccountModal";
 import AppDetailModal from "./components/AppDetailModal";
 
 const SUBMIT_EMAIL = "ovsak.gavin@gmail.com";
@@ -13,6 +15,7 @@ const USERNAME_KEY = "foamapps_github_username";
 const MYSTAR_FILTER_KEY = "foamapps_mystar_filter";
 const LOCAL_STARS_KEY = "foamapps_local_stars";
 const SORT_KEY = "foamapps_sort";
+const LANG_PREFS_KEY = "foamapps_language_prefs";
 
 type SortOption =
   | "default"
@@ -21,59 +24,19 @@ type SortOption =
   | "stars-asc"
   | "stars-desc";
 
-function loadUsername(): string {
+type CategoryOrAll = AppCategory | "all";
+
+function load<T>(key: string, fallback: T, parse: (v: string) => T): T {
   try {
-    return localStorage.getItem(USERNAME_KEY) ?? "";
+    const raw = localStorage.getItem(key);
+    return raw !== null ? parse(raw) : fallback;
   } catch {
-    return "";
+    return fallback;
   }
 }
-function saveUsername(u: string) {
+function save(key: string, value: string) {
   try {
-    localStorage.setItem(USERNAME_KEY, u);
-  } catch {
-    /* noop */
-  }
-}
-function loadMyStarFilter(): boolean {
-  try {
-    return localStorage.getItem(MYSTAR_FILTER_KEY) === "true";
-  } catch {
-    return false;
-  }
-}
-function saveMyStarFilter(v: boolean) {
-  try {
-    localStorage.setItem(MYSTAR_FILTER_KEY, String(v));
-  } catch {
-    /* noop */
-  }
-}
-function loadLocalStars(): Set<string> {
-  try {
-    const raw = localStorage.getItem(LOCAL_STARS_KEY);
-    return raw ? new Set(JSON.parse(raw) as string[]) : new Set();
-  } catch {
-    return new Set();
-  }
-}
-function saveLocalStars(stars: Set<string>) {
-  try {
-    localStorage.setItem(LOCAL_STARS_KEY, JSON.stringify([...stars]));
-  } catch {
-    /* noop */
-  }
-}
-function loadSort(): SortOption {
-  try {
-    return (localStorage.getItem(SORT_KEY) as SortOption) ?? "stars-desc";
-  } catch {
-    return "stars-desc";
-  }
-}
-function saveSort(v: SortOption) {
-  try {
-    localStorage.setItem(SORT_KEY, v);
+    localStorage.setItem(key, value);
   } catch {
     /* noop */
   }
@@ -85,22 +48,57 @@ function parseStarCount(s: string | undefined): number {
   return parseFloat(s);
 }
 
+function getBrowserLanguages(): Set<string> {
+  try {
+    const langs = navigator.languages?.length
+      ? navigator.languages
+      : [navigator.language ?? "en"];
+    return new Set(langs.map((l) => l.split("-")[0].toLowerCase()));
+  } catch {
+    return new Set(["en"]);
+  }
+}
+
 export default function App() {
   const [apps, setApps] = useState<App[]>([]);
   const [loadingApps, setLoadingApps] = useState(true);
   const [search, setSearch] = useState("");
   const [activeTags, setActiveTags] = useState<Set<string>>(new Set());
+  const [activeLanguages, setActiveLanguages] = useState<Set<string>>(
+    new Set()
+  );
+  const [activeCategory, setActiveCategory] = useState<CategoryOrAll>("all");
   const [showInfoModal, setShowInfoModal] = useState(false);
-  const [showMyStarsModal, setShowMyStarsModal] = useState(false);
+  const [showAccountModal, setShowAccountModal] = useState(false);
   const [selectedApp, setSelectedApp] = useState<App | null>(null);
-  const [githubUsername, setGithubUsername] = useState(loadUsername);
-  const [myStarFilter, setMyStarFilter] = useState(loadMyStarFilter);
-  const [localStarred, setLocalStarred] = useState<Set<string>>(loadLocalStars);
-  const [sort, setSort] = useState<SortOption>(loadSort);
+  const [githubUsername, setGithubUsername] = useState(() =>
+    load(USERNAME_KEY, "", (v) => v)
+  );
+  const [myStarFilter, setMyStarFilter] = useState(() =>
+    load(MYSTAR_FILTER_KEY, false, (v) => v === "true")
+  );
+  const [localStarred, setLocalStarred] = useState<Set<string>>(() =>
+    load(LOCAL_STARS_KEY, new Set<string>(), (v) => new Set(JSON.parse(v)))
+  );
+  const [sort, setSort] = useState<SortOption>(() =>
+    load(SORT_KEY, "stars-desc" as SortOption, (v) => v as SortOption)
+  );
   const [showFilters, setShowFilters] = useState(false);
+  const [languagePrefs, setLanguagePrefs] = useState<string[]>(() =>
+    load(LANG_PREFS_KEY, [], (v) => JSON.parse(v) as string[])
+  );
 
   const { repoStars, userStarred, loadingUserStars, rateLimited } =
     useGitHubData(apps, githubUsername);
+
+  // Browser language auto-detection (for sort boost when no prefs set)
+  const browserLanguages = useMemo(() => getBrowserLanguages(), []);
+
+  // Effective language preference: explicit prefs > browser detection
+  const effectiveLanguages = useMemo<Set<string>>(() => {
+    if (languagePrefs.length > 0) return new Set(languagePrefs);
+    return browserLanguages;
+  }, [languagePrefs, browserLanguages]);
 
   useEffect(() => {
     fetch(`${import.meta.env.BASE_URL}data/apps.json`)
@@ -114,45 +112,81 @@ export default function App() {
 
   const handleSetUsername = (u: string) => {
     setGithubUsername(u);
-    saveUsername(u);
+    save(USERNAME_KEY, u);
   };
 
   const toggleMyStarFilter = () => {
     const next = !myStarFilter;
     setMyStarFilter(next);
-    saveMyStarFilter(next);
+    save(MYSTAR_FILTER_KEY, String(next));
   };
 
   const toggleLocalStar = (url: string) => {
     setLocalStarred((prev) => {
       const next = new Set(prev);
       next.has(url) ? next.delete(url) : next.add(url);
-      saveLocalStars(next);
+      save(LOCAL_STARS_KEY, JSON.stringify([...next]));
       return next;
     });
   };
 
   const handleSortChange = (next: SortOption) => {
     setSort(next);
-    saveSort(next);
+    save(SORT_KEY, next);
   };
 
-  const allTags = useMemo(() => {
-    const counts: Record<string, number> = {};
-    apps.forEach((app) => {
-      app.tags.forEach((tag) => {
-        counts[tag] = (counts[tag] || 0) + 1;
-      });
+  const handleSaveLanguagePrefs = (langs: string[]) => {
+    setLanguagePrefs(langs);
+    save(LANG_PREFS_KEY, JSON.stringify(langs));
+  };
+
+  const toggleLanguage = (code: string) =>
+    setActiveLanguages((prev) => {
+      const next = new Set(prev);
+      next.has(code) ? next.delete(code) : next.add(code);
+      return next;
     });
 
+  // Apps filtered to the active category (base for tags + language counts)
+  const categoryFilteredApps = useMemo(() => {
+    if (activeCategory === "all") return apps;
+    return apps.filter((app) => app.category === activeCategory);
+  }, [apps, activeCategory]);
+
+  // Tag counts derived from category-scoped apps
+  const allTags = useMemo(() => {
+    const counts: Record<string, number> = {};
+    categoryFilteredApps.forEach((app) =>
+      app.tags.forEach((tag) => {
+        counts[tag] = (counts[tag] || 0) + 1;
+      })
+    );
     return Object.entries(counts)
       .map(([name, count]) => ({ name, count }))
-      .sort((a, b) => {
-        if (b.count !== a.count) {
-          return b.count - a.count;
-        }
-        return a.name.localeCompare(b.name);
-      });
+      .sort((a, b) => b.count - a.count || a.name.localeCompare(b.name));
+  }, [categoryFilteredApps]);
+
+  // Language counts derived from category-scoped apps
+  const allLanguages = useMemo(() => {
+    const counts: Record<string, number> = {};
+    categoryFilteredApps.forEach((app) =>
+      app.languages.forEach((lang) => {
+        counts[lang] = (counts[lang] || 0) + 1;
+      })
+    );
+    return Object.entries(counts)
+      .map(([code, count]) => ({ code, count }))
+      .sort((a, b) => b.count - a.count);
+  }, [categoryFilteredApps]);
+
+  // Category counts for the tabs
+  const categoryCounts = useMemo(() => {
+    const counts = { all: apps.length, clinical: 0, education: 0, data: 0 };
+    apps.forEach((app) => {
+      if (app.category in counts)
+        counts[app.category as AppCategory]++;
+    });
+    return counts;
   }, [apps]);
 
   const toggleTag = (tag: string) =>
@@ -178,7 +212,7 @@ export default function App() {
 
   const filtered = useMemo(() => {
     const q = search.toLowerCase().trim();
-    let result = apps.filter((app) => {
+    let result = categoryFilteredApps.filter((app) => {
       if (myStarFilter) {
         if (app.github) {
           if (!githubUsername || !userStarred.has(app.github)) return false;
@@ -186,6 +220,8 @@ export default function App() {
           if (!localStarred.has(app.url)) return false;
         }
       }
+      if (activeLanguages.size > 0 && !app.languages.some((l) => activeLanguages.has(l)))
+        return false;
       if (activeTags.size > 0 && !app.tags.some((t) => activeTags.has(t)))
         return false;
       if (q) {
@@ -196,29 +232,44 @@ export default function App() {
       return true;
     });
 
+    // Base sort
     if (sort === "date-asc") {
       result = [...result].sort((a, b) =>
-        (a.dateAdded ?? "").localeCompare(b.dateAdded ?? ""),
+        (a.dateAdded ?? "").localeCompare(b.dateAdded ?? "")
       );
     } else if (sort === "date-desc") {
       result = [...result].sort((a, b) =>
-        (b.dateAdded ?? "").localeCompare(a.dateAdded ?? ""),
+        (b.dateAdded ?? "").localeCompare(a.dateAdded ?? "")
       );
     } else if (sort === "stars-asc") {
       result = [...result].sort(
         (a, b) =>
           parseStarCount(a.github ? repoStars[a.github] : undefined) -
-          parseStarCount(b.github ? repoStars[b.github] : undefined),
+          parseStarCount(b.github ? repoStars[b.github] : undefined)
       );
     } else if (sort === "stars-desc") {
       result = [...result].sort(
         (a, b) =>
           parseStarCount(b.github ? repoStars[b.github] : undefined) -
-          parseStarCount(a.github ? repoStars[a.github] : undefined),
+          parseStarCount(a.github ? repoStars[a.github] : undefined)
       );
     }
 
-    // Always float starred apps to the top (stable — preserves sort within each group)
+    // Language boost: apps matching user's preferred languages float up,
+    // but only when not already filtering by language (filter already handles it)
+    if (activeLanguages.size === 0) {
+      const preferredLangs = effectiveLanguages;
+      const hasNonEnglishPref = [...preferredLangs].some((l) => l !== "en");
+      if (hasNonEnglishPref) {
+        result = [...result].sort((a, b) => {
+          const aM = a.languages.some((l) => preferredLangs.has(l));
+          const bM = b.languages.some((l) => preferredLangs.has(l));
+          return Number(bM) - Number(aM);
+        });
+      }
+    }
+
+    // Starred always float to top (stable — preserves sort within each group)
     result = [...result].sort((a, b) => {
       const aStarred = !!(a.github
         ? userStarred.has(a.github)
@@ -231,16 +282,20 @@ export default function App() {
 
     return result;
   }, [
-    apps,
+    categoryFilteredApps,
     search,
     activeTags,
+    activeLanguages,
     myStarFilter,
     githubUsername,
     userStarred,
     localStarred,
     sort,
     repoStars,
+    effectiveLanguages,
   ]);
+
+  const activeFilterCount = activeTags.size + activeLanguages.size;
 
   const SORT_OPTIONS: { value: SortOption; label: string }[] = [
     { value: "default", label: "Default" },
@@ -252,7 +307,7 @@ export default function App() {
 
   return (
     <div className="flex flex-col h-screen h-dvh bg-slate-50">
-      {/* Header — pinned by flex layout, not sticky */}
+      {/* Header */}
       <header className="bg-white border-b border-gray-100 shadow-sm z-40 shrink-0">
         {/* Top row: branding + actions */}
         <div className="max-w-6xl mx-auto px-4 pt-3 pb-2 flex items-center justify-between gap-3">
@@ -318,17 +373,23 @@ export default function App() {
               )}
             </button>
 
-            {/* Edit GitHub username */}
+            {/* Account button (GitHub + language prefs) */}
             <button
-              onClick={() => setShowMyStarsModal(true)}
-              title={
-                githubUsername
-                  ? `GitHub: ${githubUsername}`
-                  : "Set GitHub username for repo stars"
-              }
-              className="text-xs text-gray-400 hover:text-gray-600 px-2 py-1.5 rounded-lg hover:bg-gray-100 transition-colors"
+              onClick={() => setShowAccountModal(true)}
+              title={githubUsername ? `Account (@${githubUsername})` : "Account"}
+              className="flex items-center gap-1.5 text-xs text-gray-400 hover:text-gray-600 px-2 py-1.5 rounded-lg hover:bg-gray-100 transition-colors"
             >
-              {githubUsername ? `@${githubUsername}` : "@"}
+              <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
+              </svg>
+              {githubUsername && (
+                <span className="hidden sm:inline">@{githubUsername}</span>
+              )}
+              {languagePrefs.length > 0 && (
+                <span className="text-violet-500 font-medium hidden sm:inline">
+                  · {languagePrefs.length} lang{languagePrefs.length > 1 ? "s" : ""}
+                </span>
+              )}
             </button>
 
             {/* Info button */}
@@ -355,15 +416,15 @@ export default function App() {
         </div>
 
         {/* Search row */}
-        <div className="max-w-6xl mx-auto px-4 py-2.5 flex items-center gap-2">
+        <div className="max-w-6xl mx-auto px-4 py-2 flex items-center gap-2">
           <div className="flex-1">
             <SearchBar value={search} onChange={setSearch} />
           </div>
           <button
             onClick={() => setShowFilters((v) => !v)}
-            title="Toggle tag filters"
+            title="Toggle filters"
             className={`flex items-center gap-1.5 shrink-0 text-sm font-medium px-3 py-2.5 rounded-xl border transition-colors ${
-              showFilters || activeTags.size > 0
+              showFilters || activeFilterCount > 0
                 ? "bg-blue-50 border-blue-200 text-blue-700"
                 : "bg-white border-gray-200 text-gray-500 hover:bg-gray-50"
             }`}
@@ -382,17 +443,36 @@ export default function App() {
               />
             </svg>
             <span className="hidden sm:inline">Filter</span>
-            {activeTags.size > 0 && (
+            {activeFilterCount > 0 && (
               <span className="bg-blue-600 text-white text-xs rounded-full w-4 h-4 flex items-center justify-center leading-none">
-                {activeTags.size}
+                {activeFilterCount}
               </span>
             )}
           </button>
         </div>
 
-        {/* Collapsible tag filters */}
+        {/* Category tabs */}
+        <div className="max-w-6xl mx-auto px-4 pb-2.5">
+          <CategoryTabs
+            active={activeCategory}
+            onChange={(cat) => {
+              setActiveCategory(cat);
+              setActiveTags(new Set());
+              setActiveLanguages(new Set());
+            }}
+            counts={categoryCounts}
+          />
+        </div>
+
+        {/* Collapsible filters */}
         {showFilters && (
-          <div className="max-w-6xl mx-auto px-4 pb-3">
+          <div className="max-w-6xl mx-auto px-4 pb-3 space-y-2">
+            <LanguageFilter
+              languages={allLanguages}
+              activeLanguages={activeLanguages}
+              onToggle={toggleLanguage}
+              onClear={() => setActiveLanguages(new Set())}
+            />
             <TagFilter
               allTags={allTags}
               activeTags={activeTags}
@@ -402,6 +482,7 @@ export default function App() {
           </div>
         )}
       </header>
+
       {/* Scrollable content area */}
       <div className="flex-1 overflow-y-auto">
         <main className="max-w-6xl mx-auto px-4 py-6 space-y-4">
@@ -413,7 +494,7 @@ export default function App() {
                 : `${filtered.length} of ${apps.length} apps`}
               {myStarFilter && (
                 <span className="ml-1 text-amber-600 font-medium">
-                  • filtered by your stars
+                  · filtered by your stars
                 </span>
               )}
             </div>
@@ -448,8 +529,10 @@ export default function App() {
                 onClick={() => {
                   setSearch("");
                   setActiveTags(new Set());
+                  setActiveLanguages(new Set());
+                  setActiveCategory("all");
                   setMyStarFilter(false);
-                  saveMyStarFilter(false);
+                  save(MYSTAR_FILTER_KEY, "false");
                 }}
                 className="mt-2 text-sm text-blue-500 underline"
               >
@@ -493,8 +576,8 @@ export default function App() {
             Submit an app
           </a>
         </footer>
-      </div>{" "}
-      {/* end scrollable area */}
+      </div>
+
       {/* Modals */}
       {showInfoModal && (
         <InfoModal
@@ -502,12 +585,15 @@ export default function App() {
           submitEmail={SUBMIT_EMAIL}
         />
       )}
-      {showMyStarsModal && (
-        <MyStarsModal
+      {showAccountModal && (
+        <AccountModal
           currentUsername={githubUsername}
-          onSave={handleSetUsername}
-          onClose={() => setShowMyStarsModal(false)}
-          loading={loadingUserStars}
+          onSaveUsername={handleSetUsername}
+          languagePrefs={languagePrefs}
+          onSaveLanguagePrefs={handleSaveLanguagePrefs}
+          availableLanguages={allLanguages.map((l) => l.code)}
+          loadingStars={loadingUserStars}
+          onClose={() => setShowAccountModal(false)}
         />
       )}
       {selectedApp && (

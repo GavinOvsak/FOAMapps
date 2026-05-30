@@ -36,13 +36,36 @@ body:
         Leave blank if there is no public repo.
       placeholder: owner/repo
 
+  - type: dropdown
+    id: category
+    attributes:
+      label: Category
+      description: Choose the primary category that best describes this resource.
+      options:
+        - clinical
+        - education
+        - data
+    validations:
+      required: true
+
+  - type: input
+    id: languages
+    attributes:
+      label: Languages Supported
+      description: |
+        Comma-separated ISO 639-1 language codes the app supports.
+        Use lowercase 2-letter codes. English-only apps just need `en`.
+      placeholder: en, es, fr
+    validations:
+      required: true
+
   - type: input
     id: tags
     attributes:
       label: Tags
       description: |
-        Comma-separated list of relevant tags. Use lowercase, hyphen-separated words.
-        Examples: emergency, critical-care, calculators, pediatrics, radiology, pharmacology
+        Comma-separated list of specialty tags. Use lowercase, hyphen-separated words.
+        Examples: emergency, critical-care, calculators, pediatrics, radiology, pharmacology, research
       placeholder: emergency, calculators, pharmacology
     validations:
       required: true
