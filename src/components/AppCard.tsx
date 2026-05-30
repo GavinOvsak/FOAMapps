@@ -37,7 +37,7 @@ export default function AppCard({
 }: Props) {
   const t = useT()
   const nonEnglishLangs = app.languages.filter(l => l !== 'en')
-  const isDataApp = app.category === 'data'
+  const isDataApp = app.category.includes('data')
   const accessMeta = app.access ? ACCESS_META[app.access] : null
 
   return (

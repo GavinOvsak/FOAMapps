@@ -54,7 +54,7 @@ export default function AppDetailModal({ app, onClose, onSuggestEdit, onRequestR
 
           <div>
             <dt className="text-xs font-medium text-gray-400 uppercase tracking-wide mb-0.5">{t.categoryLabel}</dt>
-            <dd className="text-gray-600">{CATEGORY_META[app.category].label}</dd>
+            <dd className="text-gray-600">{app.category.map(c => CATEGORY_META[c].label).join(', ')}</dd>
           </div>
 
           <div>
