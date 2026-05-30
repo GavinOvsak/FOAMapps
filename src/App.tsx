@@ -12,6 +12,9 @@ import CategoryTabs from "./components/CategoryTabs";
 import InfoModal from "./components/InfoModal";
 import AccountModal from "./components/AccountModal";
 import AppDetailModal from "./components/AppDetailModal";
+import SubmitAppModal from "./components/SubmitAppModal";
+import EditAppModal from "./components/EditAppModal";
+import DeleteAppModal from "./components/DeleteAppModal";
 
 const SUBMIT_EMAIL = "ovsak.gavin@gmail.com";
 const USERNAME_KEY = "foamapps_github_username";
@@ -92,7 +95,10 @@ function AppInner({ languagePrefs, onSaveLanguagePrefs }: AppInnerProps) {
   const [activeCategory, setActiveCategory] = useState<CategoryOrAll>("all");
   const [showInfoModal, setShowInfoModal] = useState(false);
   const [showAccountModal, setShowAccountModal] = useState(false);
+  const [showSubmitModal, setShowSubmitModal] = useState(false);
   const [selectedApp, setSelectedApp] = useState<App | null>(null);
+  const [editingApp, setEditingApp] = useState<App | null>(null);
+  const [deletingApp, setDeletingApp] = useState<App | null>(null);
   const [githubUsername, setGithubUsername] = useState(() =>
     load(USERNAME_KEY, "", (v) => v)
   );
@@ -616,6 +622,7 @@ function AppInner({ languagePrefs, onSaveLanguagePrefs }: AppInnerProps) {
         <InfoModal
           onClose={() => setShowInfoModal(false)}
           submitEmail={SUBMIT_EMAIL}
+          onSubmitApp={() => setShowSubmitModal(true)}
         />
       )}
       {showAccountModal && (
@@ -633,7 +640,18 @@ function AppInner({ languagePrefs, onSaveLanguagePrefs }: AppInnerProps) {
         <AppDetailModal
           app={selectedApp}
           onClose={() => setSelectedApp(null)}
+          onSuggestEdit={() => { setEditingApp(selectedApp); setSelectedApp(null); }}
+          onRequestRemoval={() => { setDeletingApp(selectedApp); setSelectedApp(null); }}
         />
+      )}
+      {showSubmitModal && (
+        <SubmitAppModal onClose={() => setShowSubmitModal(false)} />
+      )}
+      {editingApp && (
+        <EditAppModal app={editingApp} onClose={() => setEditingApp(null)} />
+      )}
+      {deletingApp && (
+        <DeleteAppModal app={deletingApp} onClose={() => setDeletingApp(null)} />
       )}
     </div>
   );

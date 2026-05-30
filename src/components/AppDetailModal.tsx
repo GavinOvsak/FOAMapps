@@ -5,6 +5,8 @@ import { useT } from '../TranslationContext'
 interface Props {
   app: App
   onClose: () => void
+  onSuggestEdit: () => void
+  onRequestRemoval: () => void
 }
 
 function formatDate(iso: string): string {
@@ -12,7 +14,7 @@ function formatDate(iso: string): string {
   return d.toLocaleDateString(undefined, { year: 'numeric', month: 'long', day: 'numeric' })
 }
 
-export default function AppDetailModal({ app, onClose }: Props) {
+export default function AppDetailModal({ app, onClose, onSuggestEdit, onRequestRemoval }: Props) {
   const t = useT()
 
   return (
@@ -107,6 +109,21 @@ export default function AppDetailModal({ app, onClose }: Props) {
             </div>
           )}
         </dl>
+
+        <div className="mt-5 pt-4 border-t border-gray-100 flex gap-2">
+          <button
+            onClick={onSuggestEdit}
+            className="flex-1 py-1.5 rounded-lg border border-gray-200 text-xs font-medium text-gray-500 hover:border-blue-300 hover:text-blue-600 transition-colors"
+          >
+            Suggest Edit
+          </button>
+          <button
+            onClick={onRequestRemoval}
+            className="flex-1 py-1.5 rounded-lg border border-gray-200 text-xs font-medium text-gray-500 hover:border-red-300 hover:text-red-500 transition-colors"
+          >
+            Request Removal
+          </button>
+        </div>
       </div>
     </div>
   )
