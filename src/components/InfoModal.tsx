@@ -3,9 +3,10 @@ import { useT } from '../TranslationContext'
 interface Props {
   onClose: () => void
   submitEmail: string
+  onSubmitApp: () => void
 }
 
-export default function InfoModal({ onClose, submitEmail }: Props) {
+export default function InfoModal({ onClose, submitEmail, onSubmitApp }: Props) {
   const t = useT()
 
   return (
@@ -45,27 +46,20 @@ export default function InfoModal({ onClose, submitEmail }: Props) {
           <li>{t.infoStep4}</li>
         </ul>
 
-        <h3 className="font-semibold text-gray-900 mb-1">{t.infoSubmitTitle}</h3>
-        <p className="mb-1 text-gray-600">{t.infoSubmitDesc}</p>
-        <ul className="list-disc list-inside space-y-1 text-gray-600">
-          <li>
-            <a
-              href="https://github.com/GavinOvsak/FOAMapps/issues/new?template=add-app.yml"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="text-blue-600 underline"
-            >
-              {t.infoGithubIssue}
-            </a>{' '}
-            {t.infoUsingTemplate}
-          </li>
-          <li>
-            {t.infoEmail}{' '}
-            <a href={`mailto:${submitEmail}`} className="text-blue-600 underline">
-              {submitEmail}
-            </a>
-          </li>
-        </ul>
+        <h3 className="font-semibold text-gray-900 mb-2">{t.infoSubmitTitle}</h3>
+        <p className="mb-3 text-gray-600">{t.infoSubmitDesc}</p>
+        <button
+          onClick={() => { onClose(); onSubmitApp() }}
+          className="w-full py-2.5 rounded-xl bg-blue-600 text-white text-sm font-semibold hover:bg-blue-700 transition-colors mb-3"
+        >
+          Submit an App →
+        </button>
+        <p className="text-xs text-gray-400">
+          {t.infoEmail}{' '}
+          <a href={`mailto:${submitEmail}`} className="text-blue-500 underline">
+            {submitEmail}
+          </a>
+        </p>
 
         <p className="mt-4 text-xs text-gray-400">{t.infoFooterNote}</p>
       </div>

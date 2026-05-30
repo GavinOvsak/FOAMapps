@@ -362,17 +362,6 @@ function AppInner({ languagePrefs, onSaveLanguagePrefs }: AppInnerProps) {
             )}
 
             <button
-              onClick={() => setShowSubmitModal(true)}
-              title="Submit an app"
-              className="flex items-center gap-1.5 text-sm font-medium px-3 py-1.5 rounded-lg bg-blue-600 text-white hover:bg-blue-700 transition-colors"
-            >
-              <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 4v16m8-8H4" />
-              </svg>
-              <span className="hidden sm:inline">Submit App</span>
-            </button>
-
-            <button
               onClick={toggleMyStarFilter}
               title={t.myStars}
               className={`flex items-center gap-1.5 text-sm font-medium px-3 py-1.5 rounded-lg transition-colors ${
@@ -633,6 +622,7 @@ function AppInner({ languagePrefs, onSaveLanguagePrefs }: AppInnerProps) {
         <InfoModal
           onClose={() => setShowInfoModal(false)}
           submitEmail={SUBMIT_EMAIL}
+          onSubmitApp={() => setShowSubmitModal(true)}
         />
       )}
       {showAccountModal && (
