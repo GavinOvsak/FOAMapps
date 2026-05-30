@@ -1,4 +1,5 @@
 import type { App } from '../types'
+import { LANGUAGE_NAMES, LANGUAGE_FLAGS, CATEGORY_META, ACCESS_META } from '../constants'
 
 interface Props {
   app: App
@@ -50,6 +51,45 @@ export default function AppDetailModal({ app, onClose }: Props) {
               </a>
             </dd>
           </div>
+
+          <div>
+            <dt className="text-xs font-medium text-gray-400 uppercase tracking-wide mb-0.5">Category</dt>
+            <dd className="text-gray-600">{CATEGORY_META[app.category].label}</dd>
+          </div>
+
+          <div>
+            <dt className="text-xs font-medium text-gray-400 uppercase tracking-wide mb-0.5">Languages</dt>
+            <dd className="flex flex-wrap gap-1.5">
+              {app.languages.map(code => (
+                <span key={code} className="inline-flex items-center gap-1 text-xs bg-violet-50 text-violet-800 px-2 py-0.5 rounded-full">
+                  <span>{LANGUAGE_FLAGS[code] ?? '🌐'}</span>
+                  <span>{LANGUAGE_NAMES[code] ?? code.toUpperCase()}</span>
+                </span>
+              ))}
+            </dd>
+          </div>
+
+          {app.access && (
+            <div>
+              <dt className="text-xs font-medium text-gray-400 uppercase tracking-wide mb-0.5">Access</dt>
+              <dd>
+                <span className={`inline-flex text-xs font-medium px-2 py-0.5 rounded-full ${ACCESS_META[app.access].color}`}>
+                  {ACCESS_META[app.access].label}
+                </span>
+              </dd>
+            </div>
+          )}
+
+          {app.dataType && app.dataType.length > 0 && (
+            <div>
+              <dt className="text-xs font-medium text-gray-400 uppercase tracking-wide mb-0.5">Data Types</dt>
+              <dd className="flex flex-wrap gap-1.5">
+                {app.dataType.map(dt => (
+                  <span key={dt} className="text-xs bg-gray-100 text-gray-600 px-2 py-0.5 rounded-full">{dt}</span>
+                ))}
+              </dd>
+            </div>
+          )}
 
           {app.github && (
             <div>

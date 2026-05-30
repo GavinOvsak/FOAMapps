@@ -1,4 +1,5 @@
 import type { App } from '../types'
+import { LANGUAGE_FLAGS, ACCESS_META } from '../constants'
 
 const TAG_COLORS = [
   'bg-blue-100 text-blue-800',
@@ -33,6 +34,9 @@ interface Props {
 export default function AppCard({
   app, stars, isUserStarred, isLocalStarred, onToggleLocalStar, onOpenDetail, activeTag, onTagClick,
 }: Props) {
+  const nonEnglishLangs = app.languages.filter(l => l !== 'en')
+  const isDataApp = app.category === 'data'
+
   return (
     <div
       className="bg-white rounded-xl shadow-sm border border-gray-100 flex flex-col hover:shadow-md transition-shadow duration-200 cursor-pointer"
@@ -41,7 +45,6 @@ export default function AppCard({
       {/* Card header */}
       <div className="flex items-start justify-between gap-2 p-4 pb-2">
         <div className="flex items-center gap-1.5 min-w-0">
-          {/* Info button */}
           <button
             onClick={e => { e.stopPropagation(); onOpenDetail() }}
             title="More info"
@@ -96,7 +99,7 @@ export default function AppCard({
         <p className="px-4 pb-2 text-xs text-gray-400 truncate">{app.description}</p>
       )}
 
-      {/* Tags */}
+      {/* Tags + language flags + access badge */}
       <div className="flex flex-wrap gap-1.5 px-4 pb-3">
         {app.tags.map(tag => (
           <button
@@ -109,6 +112,24 @@ export default function AppCard({
             {tag}
           </button>
         ))}
+
+        {/* Language flags for multilingual apps */}
+        {nonEnglishLangs.length > 0 && (
+          <span className="flex items-center gap-0.5 text-xs text-gray-400 ml-0.5" title={`Also available in: ${nonEnglishLangs.join(', ')}`}>
+            {nonEnglishLangs.map(l => (
+              <span key={l} className="text-sm leading-none" role="img" aria-label={l}>
+                {LANGUAGE_FLAGS[l] ?? '🌐'}
+              </span>
+            ))}
+          </span>
+        )}
+
+        {/* Access badge for data apps */}
+        {isDataApp && app.access && (
+          <span className={`text-xs font-medium px-2 py-0.5 rounded-full ${ACCESS_META[app.access].color}`}>
+            {ACCESS_META[app.access].label}
+          </span>
+        )}
       </div>
 
       {/* Actions */}
@@ -120,7 +141,7 @@ export default function AppCard({
           onClick={e => e.stopPropagation()}
           className="flex-1 text-center text-sm font-medium bg-blue-600 hover:bg-blue-700 text-white px-3 py-1.5 rounded-lg transition-colors"
         >
-          Open App
+          {isDataApp ? 'Access Data' : 'Open App'}
         </a>
         {app.github && (
           <a

@@ -1,10 +1,17 @@
+export type AppCategory = 'clinical' | 'education' | 'data'
+export type DataAccess = 'open' | 'credentialed' | 'restricted'
+
 export interface App {
   name: string
   url: string
   tags: string[]
-  github?: string       // "owner/repo" format
-  description?: string  // short description / GitHub about
-  dateAdded?: string    // ISO date string, e.g. "2026-05-25"
+  category: AppCategory
+  languages: string[]       // ISO 639-1 codes, e.g. ["en", "es"]
+  github?: string           // "owner/repo" format
+  description?: string
+  dateAdded?: string        // YYYY-MM-DD
+  access?: DataAccess       // data resources only
+  dataType?: string[]       // data resources only
 }
 
 export interface RepoData {
