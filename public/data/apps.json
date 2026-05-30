@@ -3,8 +3,12 @@
     "name": "MDCalc",
     "url": "https://www.mdcalc.com",
     "category": "clinical",
-    "languages": ["en"],
-    "tags": ["calculators"],
+    "languages": [
+      "en"
+    ],
+    "tags": [
+      "calculators"
+    ],
     "description": "The most widely used medical calculator and clinical decision support tool, with hundreds of validated scores and risk stratification tools.",
     "dateAdded": "2026-05-25"
   },
@@ -12,8 +16,16 @@
     "name": "LITFL – Life in the Fast Lane",
     "url": "https://litfl.com",
     "category": "clinical",
-    "languages": ["en"],
-    "tags": ["emergency", "critical-care", "ECG", "reference", "pharmacology"],
+    "languages": [
+      "en"
+    ],
+    "tags": [
+      "emergency",
+      "critical-care",
+      "ECG",
+      "reference",
+      "pharmacology"
+    ],
     "description": "Comprehensive emergency medicine and critical care education resource covering ECG library, toxicology, and clinical cases.",
     "dateAdded": "2026-05-25"
   },
@@ -21,8 +33,13 @@
     "name": "EMCrit",
     "url": "https://emcrit.org",
     "category": "education",
-    "languages": ["en"],
-    "tags": ["emergency", "critical-care"],
+    "languages": [
+      "en"
+    ],
+    "tags": [
+      "emergency",
+      "critical-care"
+    ],
     "description": "Emergency medicine and critical care education by Scott Weingart, focusing on resuscitation, airway management, and ICU-level ED care.",
     "dateAdded": "2026-05-25"
   },
@@ -30,8 +47,13 @@
     "name": "Radiopaedia",
     "url": "https://radiopaedia.org",
     "category": "clinical",
-    "languages": ["en"],
-    "tags": ["radiology", "reference"],
+    "languages": [
+      "en"
+    ],
+    "tags": [
+      "radiology",
+      "reference"
+    ],
     "description": "Collaborative radiology reference with thousands of cases, articles, and a comprehensive imaging encyclopedia.",
     "dateAdded": "2026-05-25"
   },
@@ -39,8 +61,13 @@
     "name": "REBEL EM",
     "url": "https://rebelem.com",
     "category": "education",
-    "languages": ["en"],
-    "tags": ["emergency", "evidence-based"],
+    "languages": [
+      "en"
+    ],
+    "tags": [
+      "emergency",
+      "evidence-based"
+    ],
     "description": "Evidence-based emergency medicine reviews critically appraising the latest research to guide clinical practice.",
     "dateAdded": "2026-05-25"
   },
@@ -48,8 +75,13 @@
     "name": "CoreEM",
     "url": "https://coreem.net",
     "category": "clinical",
-    "languages": ["en"],
-    "tags": ["emergency", "reference"],
+    "languages": [
+      "en"
+    ],
+    "tags": [
+      "emergency",
+      "reference"
+    ],
     "description": "Core emergency medicine educational content covering key diagnoses, procedures, and clinical pearls.",
     "dateAdded": "2026-05-25"
   },
@@ -57,8 +89,17 @@
     "name": "OpenPediatrics",
     "url": "https://www.openpediatrics.org",
     "category": "education",
-    "languages": ["en", "es", "fr", "pt"],
-    "tags": ["pediatrics", "critical-care", "education"],
+    "languages": [
+      "en",
+      "es",
+      "fr",
+      "pt"
+    ],
+    "tags": [
+      "pediatrics",
+      "critical-care",
+      "education"
+    ],
     "description": "Global pediatric critical care education platform offering courses, simulations, and expert lectures for healthcare providers worldwide.",
     "dateAdded": "2026-05-25"
   },
@@ -66,8 +107,14 @@
     "name": "ClinCalc",
     "url": "https://clincalc.com",
     "category": "clinical",
-    "languages": ["en"],
-    "tags": ["calculators", "pharmacology", "statistics"],
+    "languages": [
+      "en"
+    ],
+    "tags": [
+      "calculators",
+      "pharmacology",
+      "statistics"
+    ],
     "description": "Clinical calculators and drug dosing tools for healthcare professionals, including drug interaction checkers and statistical calculators.",
     "dateAdded": "2026-05-25"
   },
@@ -75,8 +122,13 @@
     "name": "Global RPh",
     "url": "https://globalrph.com",
     "category": "clinical",
-    "languages": ["en"],
-    "tags": ["pharmacology", "calculators"],
+    "languages": [
+      "en"
+    ],
+    "tags": [
+      "pharmacology",
+      "calculators"
+    ],
     "description": "Comprehensive pharmacist-curated drug dosing calculators, renal dosing guides, and clinical pharmacy references.",
     "dateAdded": "2026-05-25"
   },
@@ -84,8 +136,14 @@
     "name": "NephSIM",
     "url": "https://nephsim.com",
     "category": "education",
-    "languages": ["en"],
-    "tags": ["nephrology", "simulation", "education"],
+    "languages": [
+      "en"
+    ],
+    "tags": [
+      "nephrology",
+      "simulation",
+      "education"
+    ],
     "description": "Interactive nephrology simulation platform for learning and practicing renal physiology and clinical decision-making.",
     "dateAdded": "2026-05-25"
   },
@@ -93,8 +151,14 @@
     "name": "PulmCCM",
     "url": "https://pulmccm.org",
     "category": "education",
-    "languages": ["en"],
-    "tags": ["pulmonology", "critical-care", "evidence-based"],
+    "languages": [
+      "en"
+    ],
+    "tags": [
+      "pulmonology",
+      "critical-care",
+      "evidence-based"
+    ],
     "description": "Evidence-based critical care and pulmonology updates summarising landmark trials and clinical guidelines for intensivists.",
     "dateAdded": "2026-05-25"
   },
@@ -102,8 +166,14 @@
     "name": "Taming the SRU",
     "url": "https://www.tamingthesru.com",
     "category": "education",
-    "languages": ["en"],
-    "tags": ["emergency", "ultrasound", "critical-care"],
+    "languages": [
+      "en"
+    ],
+    "tags": [
+      "emergency",
+      "ultrasound",
+      "critical-care"
+    ],
     "description": "Emergency medicine education focused on point-of-care ultrasound, resuscitation, and managing the sickest ED patients.",
     "dateAdded": "2026-05-25"
   },
@@ -111,8 +181,14 @@
     "name": "EM Clerkship",
     "url": "https://www.emclerkship.com",
     "category": "education",
-    "languages": ["en"],
-    "tags": ["emergency", "education", "students"],
+    "languages": [
+      "en"
+    ],
+    "tags": [
+      "emergency",
+      "education",
+      "students"
+    ],
     "description": "Emergency medicine clerkship resource for medical students covering core presentations, procedures, and survival guides.",
     "dateAdded": "2026-05-25"
   },
@@ -120,8 +196,14 @@
     "name": "Pediatric Emergency Standards",
     "url": "https://www.pedsemergencycare.com",
     "category": "clinical",
-    "languages": ["en"],
-    "tags": ["pediatrics", "emergency", "reference"],
+    "languages": [
+      "en"
+    ],
+    "tags": [
+      "pediatrics",
+      "emergency",
+      "reference"
+    ],
     "description": "Reference standards and clinical guidelines for pediatric emergency care, including weight-based dosing and resuscitation checklists.",
     "dateAdded": "2026-05-25"
   },
@@ -129,8 +211,14 @@
     "name": "Internet Book of Critical Care (IBCC)",
     "url": "https://emcrit.org/ibcc/toc",
     "category": "education",
-    "languages": ["en"],
-    "tags": ["critical-care", "reference", "education"],
+    "languages": [
+      "en"
+    ],
+    "tags": [
+      "critical-care",
+      "reference",
+      "education"
+    ],
     "description": "Free online critical care textbook by Josh Farkas covering every ICU topic in depth with practical, evidence-based guidance.",
     "dateAdded": "2026-05-25"
   },
@@ -138,8 +226,13 @@
     "name": "StatPearls",
     "url": "https://www.ncbi.nlm.nih.gov/books/NBK430685",
     "category": "education",
-    "languages": ["en"],
-    "tags": ["reference", "education"],
+    "languages": [
+      "en"
+    ],
+    "tags": [
+      "reference",
+      "education"
+    ],
     "description": "Continuously updated, peer-reviewed medical reference available free via NCBI, covering thousands of clinical topics.",
     "dateAdded": "2026-05-25"
   },
@@ -147,8 +240,14 @@
     "name": "EBM Consult",
     "url": "https://www.ebmconsult.com",
     "category": "clinical",
-    "languages": ["en"],
-    "tags": ["evidence-based", "calculators", "reference"],
+    "languages": [
+      "en"
+    ],
+    "tags": [
+      "evidence-based",
+      "calculators",
+      "reference"
+    ],
     "description": "Evidence-based medicine calculators, clinical criteria, and quick reference tools grounded in the primary literature.",
     "dateAdded": "2026-05-25"
   },
@@ -156,8 +255,13 @@
     "name": "Toronto Notes Online",
     "url": "https://torontonotes.ca",
     "category": "education",
-    "languages": ["en"],
-    "tags": ["reference", "education"],
+    "languages": [
+      "en"
+    ],
+    "tags": [
+      "reference",
+      "education"
+    ],
     "description": "Concise, comprehensive clinical review resource originally developed by University of Toronto medical students, widely used for board preparation.",
     "dateAdded": "2026-05-25"
   },
@@ -165,8 +269,16 @@
     "name": "Amboss (Free Tier)",
     "url": "https://www.amboss.com",
     "category": "education",
-    "languages": ["en", "de"],
-    "tags": ["reference", "education", "pharmacology", "students"],
+    "languages": [
+      "en",
+      "de"
+    ],
+    "tags": [
+      "reference",
+      "education",
+      "pharmacology",
+      "students"
+    ],
     "description": "Medical knowledge platform with a free tier providing access to a large library of clinical articles, Qbank previews, and drug information.",
     "dateAdded": "2026-05-25"
   },
@@ -174,8 +286,14 @@
     "name": "The NNT",
     "url": "https://www.thennt.com",
     "category": "clinical",
-    "languages": ["en"],
-    "tags": ["evidence-based", "statistics", "pharmacology"],
+    "languages": [
+      "en"
+    ],
+    "tags": [
+      "evidence-based",
+      "statistics",
+      "pharmacology"
+    ],
     "description": "Plain-language summaries of NNT (number needed to treat) and NNH for common therapies, making trial data accessible at the bedside.",
     "dateAdded": "2026-05-25"
   },
@@ -183,8 +301,13 @@
     "name": "Rational Clinical Examination (JAMA)",
     "url": "https://jamanetwork.com/collections/44038/the-rational-clinical-examination",
     "category": "clinical",
-    "languages": ["en"],
-    "tags": ["evidence-based", "reference"],
+    "languages": [
+      "en"
+    ],
+    "tags": [
+      "evidence-based",
+      "reference"
+    ],
     "description": "JAMA series reviewing the evidence behind physical examination findings and their diagnostic accuracy.",
     "dateAdded": "2026-05-25"
   },
@@ -192,8 +315,14 @@
     "name": "Teach Me Anatomy",
     "url": "https://teachmeanatomy.info",
     "category": "education",
-    "languages": ["en"],
-    "tags": ["anatomy", "education", "reference"],
+    "languages": [
+      "en"
+    ],
+    "tags": [
+      "anatomy",
+      "education",
+      "reference"
+    ],
     "description": "Free, illustrated anatomy reference covering all body regions with clear diagrams and clinical correlations for students and clinicians.",
     "dateAdded": "2026-05-25"
   },
@@ -201,8 +330,16 @@
     "name": "Kenhub",
     "url": "https://www.kenhub.com",
     "category": "education",
-    "languages": ["en", "de", "pt", "es"],
-    "tags": ["anatomy", "education"],
+    "languages": [
+      "en",
+      "de",
+      "pt",
+      "es"
+    ],
+    "tags": [
+      "anatomy",
+      "education"
+    ],
     "description": "Interactive anatomy learning platform with illustrated atlases, quizzes, and video tutorials (free tier available).",
     "dateAdded": "2026-05-25"
   },
@@ -210,8 +347,14 @@
     "name": "3D Slicer",
     "url": "https://www.slicer.org",
     "category": "data",
-    "languages": ["en"],
-    "tags": ["radiology", "imaging", "research"],
+    "languages": [
+      "en"
+    ],
+    "tags": [
+      "radiology",
+      "imaging",
+      "research"
+    ],
     "github": "Slicer/Slicer",
     "description": "Open-source platform for medical image informatics, image processing, and 3D visualization used in research and clinical settings.",
     "dateAdded": "2026-05-25"
@@ -220,8 +363,17 @@
     "name": "OpenMRS",
     "url": "https://openmrs.org",
     "category": "clinical",
-    "languages": ["en", "es", "fr", "ar", "pt"],
-    "tags": ["global-health", "education"],
+    "languages": [
+      "en",
+      "es",
+      "fr",
+      "ar",
+      "pt"
+    ],
+    "tags": [
+      "global-health",
+      "education"
+    ],
     "github": "openmrs/openmrs-core",
     "description": "Open-source electronic medical records platform designed for resource-constrained environments, powering health systems across Africa, Asia, and beyond.",
     "dateAdded": "2026-05-25"
@@ -230,8 +382,13 @@
     "name": "BlockDocs",
     "url": "https://blockdocs.github.io/",
     "category": "clinical",
-    "languages": ["en"],
-    "tags": ["anesthesia", "reference"],
+    "languages": [
+      "en"
+    ],
+    "tags": [
+      "anesthesia",
+      "reference"
+    ],
     "github": "blockdocs/blockdocs.github.io",
     "description": "Free open-access reference for regional anesthesia and nerve blocks, with illustrated guides to ultrasound-guided and landmark techniques.",
     "dateAdded": "2026-05-25"
@@ -240,8 +397,14 @@
     "name": "Coags",
     "url": "https://coags.app/",
     "category": "clinical",
-    "languages": ["en"],
-    "tags": ["hematology", "calculators", "pharmacology"],
+    "languages": [
+      "en"
+    ],
+    "tags": [
+      "hematology",
+      "calculators",
+      "pharmacology"
+    ],
     "description": "Practical anticoagulation and coagulation management tool for clinicians, covering dosing, reversal agents, and bridging decisions.",
     "dateAdded": "2026-05-25"
   },
@@ -249,8 +412,15 @@
     "name": "PEPT – Perioperative Electrophysiology Training Program",
     "url": "https://pept.org/",
     "category": "education",
-    "languages": ["en"],
-    "tags": ["anesthesia", "education", "ECG", "reference"],
+    "languages": [
+      "en"
+    ],
+    "tags": [
+      "anesthesia",
+      "education",
+      "ECG",
+      "reference"
+    ],
     "description": "Welcome to the Perioperative Electrophysiology Training Program website. This website is designed to help anesthesiologists learn how to manage pacemakers and ICDs in the perioperative period. On this website, you will find the Credentialing Process we use at the MGH, the lectures that are required for this credentialing process, and much more.",
     "dateAdded": "2026-05-25"
   },
@@ -258,8 +428,14 @@
     "name": "BiliTool",
     "url": "https://bilitool.org/",
     "category": "clinical",
-    "languages": ["en"],
-    "tags": ["pediatrics", "calculators", "reference"],
+    "languages": [
+      "en"
+    ],
+    "tags": [
+      "pediatrics",
+      "calculators",
+      "reference"
+    ],
     "description": "BiliTool provides care recommendations for newborn infants with jaundice (hyperbilirubinemia) at risk for bilirubin encephalopathy and kernicterus.",
     "dateAdded": "2026-05-25"
   },
@@ -267,8 +443,16 @@
     "name": "CodeRunner – ACLS / PALS Companion",
     "url": "https://gavinovsak.github.io/CodeRunner/",
     "category": "clinical",
-    "languages": ["en"],
-    "tags": ["anesthesia", "emergency", "critical-care", "pediatrics", "reference"],
+    "languages": [
+      "en"
+    ],
+    "tags": [
+      "anesthesia",
+      "emergency",
+      "critical-care",
+      "pediatrics",
+      "reference"
+    ],
     "github": "GavinOvsak/CodeRunner",
     "description": "ACLS / PALS resuscitation protocol companion for trained healthcare providers to manage cardiac arrest and pediatric emergencies.",
     "dateAdded": "2026-05-29"
@@ -277,10 +461,20 @@
     "name": "PhysioNet",
     "url": "https://physionet.org",
     "category": "data",
-    "languages": ["en"],
-    "tags": ["research", "waveforms", "critical-care"],
+    "languages": [
+      "en"
+    ],
+    "tags": [
+      "research",
+      "waveforms",
+      "critical-care"
+    ],
     "access": "credentialed",
-    "dataType": ["waveform", "EHR", "ECG"],
+    "dataType": [
+      "waveform",
+      "EHR",
+      "ECG"
+    ],
     "description": "Repository of freely-available physiological signals and clinical data, including the MIMIC databases and hundreds of annotated waveform recordings.",
     "dateAdded": "2026-05-30"
   },
@@ -288,21 +482,41 @@
     "name": "MIMIC-IV",
     "url": "https://physionet.org/content/mimiciv/latest/",
     "category": "data",
-    "languages": ["en"],
-    "tags": ["research", "critical-care", "statistics"],
+    "languages": [
+      "en"
+    ],
+    "tags": [
+      "research",
+      "critical-care",
+      "statistics"
+    ],
     "access": "credentialed",
-    "dataType": ["EHR", "ICU"],
+    "dataType": [
+      "EHR",
+      "ICU"
+    ],
     "description": "Freely accessible critical care database from Beth Israel Deaconess Medical Center, containing de-identified data for over 40,000 ICU admissions.",
-    "dateAdded": "2026-05-30"
+    "dateAdded": "2026-05-30",
+    "github": "MIT-LCP/mimic-iv"
   },
   {
     "name": "NHANES",
     "url": "https://www.cdc.gov/nchs/nhanes/",
     "category": "data",
-    "languages": ["en"],
-    "tags": ["research", "epidemiology", "statistics"],
+    "languages": [
+      "en"
+    ],
+    "tags": [
+      "research",
+      "epidemiology",
+      "statistics"
+    ],
     "access": "open",
-    "dataType": ["survey", "demographics", "lab"],
+    "dataType": [
+      "survey",
+      "demographics",
+      "lab"
+    ],
     "description": "National Health and Nutrition Examination Survey: population-level health and nutrition data from the CDC, freely downloadable for research.",
     "dateAdded": "2026-05-30"
   },
@@ -310,10 +524,21 @@
     "name": "OpenNeuro",
     "url": "https://openneuro.org",
     "category": "data",
-    "languages": ["en"],
-    "tags": ["research", "neurology", "imaging"],
+    "languages": [
+      "en"
+    ],
+    "tags": [
+      "research",
+      "neurology",
+      "imaging"
+    ],
     "access": "open",
-    "dataType": ["MRI", "fMRI", "EEG", "MEG"],
+    "dataType": [
+      "MRI",
+      "fMRI",
+      "EEG",
+      "MEG"
+    ],
     "description": "Free and open platform for sharing neuroimaging data (MRI, fMRI, EEG, MEG) in BIDS format, with over 1,000 public datasets.",
     "dateAdded": "2026-05-30"
   },
@@ -321,10 +546,19 @@
     "name": "SEER (NCI)",
     "url": "https://seer.cancer.gov",
     "category": "data",
-    "languages": ["en"],
-    "tags": ["research", "oncology", "epidemiology"],
+    "languages": [
+      "en"
+    ],
+    "tags": [
+      "research",
+      "oncology",
+      "epidemiology"
+    ],
     "access": "open",
-    "dataType": ["cancer registry", "epidemiology"],
+    "dataType": [
+      "cancer registry",
+      "epidemiology"
+    ],
     "description": "Surveillance, Epidemiology, and End Results program: population-based cancer incidence and survival data from the National Cancer Institute.",
     "dateAdded": "2026-05-30"
   },
@@ -332,10 +566,17 @@
     "name": "ClinicalTrials.gov",
     "url": "https://clinicaltrials.gov",
     "category": "data",
-    "languages": ["en"],
-    "tags": ["research", "evidence-based"],
+    "languages": [
+      "en"
+    ],
+    "tags": [
+      "research",
+      "evidence-based"
+    ],
     "access": "open",
-    "dataType": ["clinical trials"],
+    "dataType": [
+      "clinical trials"
+    ],
     "description": "Registry and results database for publicly and privately supported clinical studies, with over 400,000 trials from 220 countries.",
     "dateAdded": "2026-05-30"
   }
