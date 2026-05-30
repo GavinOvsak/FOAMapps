@@ -1,10 +1,12 @@
 import { useState } from 'react'
 import { LANGUAGE_NAMES, CATEGORY_META } from '../constants'
 import type { App, AppCategory } from '../types'
+import TagInput from './TagInput'
 
 interface Props {
   app: App
   onClose: () => void
+  existingTags: string[]
 }
 
 const REPO = 'GavinOvsak/FOAMapps'
@@ -13,17 +15,17 @@ function buildIssueUrl(title: string, body: string): string {
   return `https://github.com/${REPO}/issues/new?title=${encodeURIComponent(title)}&body=${encodeURIComponent(body)}`
 }
 
-export default function EditAppModal({ app, onClose }: Props) {
+export default function EditAppModal({ app, onClose, existingTags }: Props) {
   const [name, setName] = useState(app.name)
   const [url, setUrl] = useState(app.url)
   const [github, setGithub] = useState(app.github ?? '')
   const [category, setCategory] = useState<AppCategory>(app.category)
   const [languages, setLanguages] = useState<Set<string>>(new Set(app.languages))
-  const [tags, setTags] = useState(app.tags.join(', '))
+  const [tags, setTags] = useState<string[]>(app.tags)
   const [description, setDescription] = useState(app.description ?? '')
   const [reason, setReason] = useState('')
 
-  const isValid = name.trim() && url.trim() && tags.trim() && reason.trim()
+  const isValid = name.trim() && url.trim() && tags.length > 0 && reason.trim()
 
   const toggleLang = (code: string) =>
     setLanguages(prev => {
@@ -33,7 +35,7 @@ export default function EditAppModal({ app, onClose }: Props) {
     })
 
   const handleSubmit = () => {
-    const tagList = tags.split(',').map(t => t.trim().toLowerCase().replace(/\s+/g, '-')).filter(Boolean)
+    const tagList = tags
     const langList = [...languages]
 
     const data: Record<string, unknown> = {
@@ -149,8 +151,12 @@ export default function EditAppModal({ app, onClose }: Props) {
             </div>
           </Field>
 
-          <Field label="Tags" required hint="comma-separated, lowercase-hyphenated">
-            <input className={inputCls} value={tags} onChange={e => setTags(e.target.value)} />
+          <Field label="Tags" required hint="pick existing or type your own, press Enter">
+            <TagInput
+              value={tags}
+              onChange={setTags}
+              suggestions={existingTags}
+            />
           </Field>
 
           <Field label="Description" hint="optional">

@@ -1,9 +1,11 @@
 import { useState } from 'react'
 import { LANGUAGE_NAMES, CATEGORY_META } from '../constants'
 import type { AppCategory } from '../types'
+import TagInput from './TagInput'
 
 interface Props {
   onClose: () => void
+  existingTags: string[]
 }
 
 const REPO = 'GavinOvsak/FOAMapps'
@@ -18,18 +20,18 @@ const CHECKLISTS = [
   'I have searched the existing apps list to avoid duplicates',
 ]
 
-export default function SubmitAppModal({ onClose }: Props) {
+export default function SubmitAppModal({ onClose, existingTags }: Props) {
   const [name, setName] = useState('')
   const [url, setUrl] = useState('')
   const [github, setGithub] = useState('')
   const [category, setCategory] = useState<AppCategory>('clinical')
   const [languages, setLanguages] = useState<Set<string>>(new Set(['en']))
-  const [tags, setTags] = useState('')
+  const [tags, setTags] = useState<string[]>([])
   const [description, setDescription] = useState('')
   const [why, setWhy] = useState('')
   const [checks, setChecks] = useState([false, false, false])
 
-  const isValid = name.trim() && url.trim() && tags.trim() && why.trim() && checks.every(Boolean)
+  const isValid = name.trim() && url.trim() && tags.length > 0 && why.trim() && checks.every(Boolean)
 
   const toggleLang = (code: string) =>
     setLanguages(prev => {
@@ -39,7 +41,7 @@ export default function SubmitAppModal({ onClose }: Props) {
     })
 
   const handleSubmit = () => {
-    const tagList = tags.split(',').map(t => t.trim().toLowerCase().replace(/\s+/g, '-')).filter(Boolean)
+    const tagList = tags
     const langList = [...languages]
 
     const data: Record<string, unknown> = {
@@ -139,8 +141,13 @@ export default function SubmitAppModal({ onClose }: Props) {
             </div>
           </Field>
 
-          <Field label="Tags" required hint="comma-separated, lowercase-hyphenated">
-            <input className={inputCls} value={tags} onChange={e => setTags(e.target.value)} placeholder="emergency, calculators, pharmacology" />
+          <Field label="Tags" required hint="pick existing or type your own, press Enter">
+            <TagInput
+              value={tags}
+              onChange={setTags}
+              suggestions={existingTags}
+              placeholder="emergency, calculators, pharmacology…"
+            />
           </Field>
 
           <Field label="Description" hint="optional · shown in app detail">

@@ -211,6 +211,13 @@ function AppInner({ languagePrefs, onSaveLanguagePrefs }: AppInnerProps) {
     return buildAvailableLanguages(dataLangs);
   }, [apps]);
 
+  const allUniqueTags = useMemo(() => {
+    const seen = new Set<string>()
+    const counts: Record<string, number> = {}
+    apps.forEach(app => app.tags.forEach(t => { seen.add(t); counts[t] = (counts[t] ?? 0) + 1 }))
+    return [...seen].sort((a, b) => (counts[b] ?? 0) - (counts[a] ?? 0) || a.localeCompare(b))
+  }, [apps])
+
   const categoryCounts = useMemo(() => {
     const counts = { all: apps.length, clinical: 0, education: 0, data: 0 };
     apps.forEach((app) => {
@@ -645,10 +652,17 @@ function AppInner({ languagePrefs, onSaveLanguagePrefs }: AppInnerProps) {
         />
       )}
       {showSubmitModal && (
-        <SubmitAppModal onClose={() => setShowSubmitModal(false)} />
+        <SubmitAppModal
+          onClose={() => setShowSubmitModal(false)}
+          existingTags={allUniqueTags}
+        />
       )}
       {editingApp && (
-        <EditAppModal app={editingApp} onClose={() => setEditingApp(null)} />
+        <EditAppModal
+          app={editingApp}
+          onClose={() => setEditingApp(null)}
+          existingTags={allUniqueTags}
+        />
       )}
       {deletingApp && (
         <DeleteAppModal app={deletingApp} onClose={() => setDeletingApp(null)} />
