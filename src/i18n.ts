@@ -21,7 +21,6 @@ export interface Translations {
   appsCount: (n: number, total: number) => string
   filteredByStars: string
   // Sort
-  sortDefault: string
   sortNewest: string
   sortOldest: string
   sortMostStars: string
@@ -93,7 +92,6 @@ const en: Translations = {
   loadingApps: 'Loading apps…',
   appsCount: (n, t) => `${n} of ${t} apps`,
   filteredByStars: '· filtered by your stars',
-  sortDefault: 'Default',
   sortNewest: 'Newest first',
   sortOldest: 'Oldest first',
   sortMostStars: 'Most stars',
@@ -158,7 +156,6 @@ const es: Translations = {
   loadingApps: 'Cargando apps…',
   appsCount: (n, t) => `${n} de ${t} apps`,
   filteredByStars: '· filtrado por tus favoritos',
-  sortDefault: 'Por defecto',
   sortNewest: 'Más recientes',
   sortOldest: 'Más antiguos',
   sortMostStars: 'Más favoritos',
@@ -223,7 +220,6 @@ const fr: Translations = {
   loadingApps: 'Chargement…',
   appsCount: (n, t) => `${n} sur ${t} apps`,
   filteredByStars: '· filtré par vos favoris',
-  sortDefault: 'Par défaut',
   sortNewest: 'Plus récents',
   sortOldest: 'Plus anciens',
   sortMostStars: "Plus d'étoiles",
@@ -288,7 +284,6 @@ const de: Translations = {
   loadingApps: 'Apps werden geladen…',
   appsCount: (n, t) => `${n} von ${t} Apps`,
   filteredByStars: '· nach Favoriten gefiltert',
-  sortDefault: 'Standard',
   sortNewest: 'Neueste zuerst',
   sortOldest: 'Älteste zuerst',
   sortMostStars: 'Meiste Favoriten',
@@ -353,7 +348,6 @@ const pt: Translations = {
   loadingApps: 'Carregando apps…',
   appsCount: (n, t) => `${n} de ${t} apps`,
   filteredByStars: '· filtrado por seus favoritos',
-  sortDefault: 'Padrão',
   sortNewest: 'Mais recentes',
   sortOldest: 'Mais antigos',
   sortMostStars: 'Mais favoritos',
@@ -418,7 +412,6 @@ const vi: Translations = {
   loadingApps: 'Đang tải ứng dụng…',
   appsCount: (n, t) => `${n}/${t} ứng dụng`,
   filteredByStars: '· lọc theo yêu thích',
-  sortDefault: 'Mặc định',
   sortNewest: 'Mới nhất',
   sortOldest: 'Cũ nhất',
   sortMostStars: 'Nhiều yêu thích nhất',
@@ -483,7 +476,6 @@ const id: Translations = {
   loadingApps: 'Memuat aplikasi…',
   appsCount: (n, t) => `${n} dari ${t} aplikasi`,
   filteredByStars: '· difilter berdasarkan favorit',
-  sortDefault: 'Default',
   sortNewest: 'Terbaru',
   sortOldest: 'Terlama',
   sortMostStars: 'Favorit terbanyak',
