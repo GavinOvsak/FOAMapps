@@ -504,7 +504,13 @@
       "clinical"
     ],
     "languages": [
-      "en"
+      "en",
+      "fr",
+      "es",
+      "id",
+      "vi",
+      "zh",
+      "de"
     ],
     "tags": [
       "anesthesia",
