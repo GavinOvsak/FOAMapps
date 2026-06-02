@@ -24,7 +24,6 @@ const SORT_KEY = "foamapps_sort";
 const LANG_PREFS_KEY = "foamapps_language_prefs";
 
 type SortOption =
-  | "default"
   | "date-asc"
   | "date-desc"
   | "stars-asc"
@@ -340,7 +339,6 @@ function AppInner({ languagePrefs, onSaveLanguagePrefs }: AppInnerProps) {
   const activeFilterCount = activeTags.size + activeLanguages.size;
 
   const SORT_OPTIONS: { value: SortOption; label: string }[] = [
-    { value: "default", label: t.sortDefault },
     { value: "date-desc", label: t.sortNewest },
     { value: "date-asc", label: t.sortOldest },
     { value: "stars-desc", label: t.sortMostStars },
