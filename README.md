@@ -12,7 +12,7 @@ This interactive web application makes it easy for clinicians to discover, searc
 
 The database of applications powering this directory is stored in a clean, easily-editable JSON file:
 
-📍 **Path**: [`public/data/apps.json`](file:///Users/ggovsak/Documents/GitHub/FOAMapps/public/data/apps.json)
+📍 **Path**: [`public/data/apps.json`](https://github.com/gavinovsak/FOAMapps/blob/main/public/data/apps.json)
 
 ### Adding a New App
 To add a new application or update an existing one in the directory, simply append a new object to the array in `public/data/apps.json` matching the schema below:
@@ -68,4 +68,4 @@ We welcome new app submissions, corrections, and improvements! If you know of a 
 
 1. **GitHub Issue**: Open a [GitHub Issue](https://github.com/GavinOvsak/FOAMapps/issues/new?template=add-app.yml) using our curated **Add App** template.
 2. **Email**: Email the details directly to Gavin at [ovsak.gavin@gmail.com](mailto:ovsak.gavin@gmail.com).
-3. **Pull Request (PR)**: Fork the repository, add the application directly to the database in [`public/data/apps.json`](file:///Users/ggovsak/Documents/GitHub/FOAMapps/public/data/apps.json) matching the schema outlined above, and submit a Pull Request.
+3. **Pull Request (PR)**: Fork the repository, add the application directly to the database in [`public/data/apps.json`](https://github.com/gavinovsak/FOAMapps/blob/main/public/data/apps.json) matching the schema outlined above, and submit a Pull Request.
