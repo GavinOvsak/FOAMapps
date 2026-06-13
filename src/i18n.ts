@@ -134,7 +134,7 @@ const en: Translations = {
   infoSubmitDesc: 'Know a free, open-access medical app that belongs here? Submit it two ways:',
   infoGithubIssue: 'GitHub issue',
   infoUsingTemplate: 'using our "Add App" template.',
-  infoEmail: 'Email',
+  infoEmail: 'Questions? Email',
   infoFooterNote: 'Star counts are fetched from the GitHub API and cached for 1 hour. The GitHub API allows 60 unauthenticated requests/hour per IP.',
   submitAnApp: 'Submit an app',
 }
@@ -198,7 +198,7 @@ const es: Translations = {
   infoSubmitDesc: '¿Conoces una app médica gratuita y de acceso abierto que debería estar aquí? Envíala de dos maneras:',
   infoGithubIssue: 'issue de GitHub',
   infoUsingTemplate: 'usando nuestra plantilla "Agregar App".',
-  infoEmail: 'Correo electrónico',
+  infoEmail: '¿Preguntas? Escríbenos a',
   infoFooterNote: 'El conteo de estrellas se obtiene de la API de GitHub y se guarda en caché por 1 hora. La API permite 60 solicitudes sin autenticación por hora por IP.',
   submitAnApp: 'Enviar una app',
 }
@@ -262,7 +262,7 @@ const fr: Translations = {
   infoSubmitDesc: 'Vous connaissez une app médicale gratuite en accès libre qui devrait figurer ici ? Soumettez-la de deux façons :',
   infoGithubIssue: 'issue GitHub',
   infoUsingTemplate: 'en utilisant notre modèle "Ajouter une App".',
-  infoEmail: 'E-mail',
+  infoEmail: 'Questions ? Envoyez un e-mail à',
   infoFooterNote: "Le nombre d'étoiles est récupéré depuis l'API GitHub et mis en cache pendant 1 heure. L'API autorise 60 requêtes non authentifiées par heure par IP.",
   submitAnApp: 'Soumettre une app',
 }
@@ -326,7 +326,7 @@ const de: Translations = {
   infoSubmitDesc: 'Kennen Sie eine kostenlose medizinische App, die hier fehlt? Reichen Sie sie auf zwei Wegen ein:',
   infoGithubIssue: 'GitHub Issue',
   infoUsingTemplate: 'mit unserem „App hinzufügen"-Template.',
-  infoEmail: 'E-Mail',
+  infoEmail: 'Fragen? E-Mail an',
   infoFooterNote: 'Sternzahlen werden von der GitHub API abgerufen und für 1 Stunde zwischengespeichert. Die API erlaubt 60 nicht authentifizierte Anfragen pro Stunde und IP.',
   submitAnApp: 'App einreichen',
 }
@@ -390,7 +390,7 @@ const pt: Translations = {
   infoSubmitDesc: 'Conhece um app médico gratuito e de acesso aberto que deveria estar aqui? Envie de duas formas:',
   infoGithubIssue: 'issue no GitHub',
   infoUsingTemplate: 'usando nosso modelo "Adicionar App".',
-  infoEmail: 'E-mail',
+  infoEmail: 'Dúvidas? Envie um e-mail para',
   infoFooterNote: 'A contagem de estrelas é obtida da API do GitHub e armazenada em cache por 1 hora. A API permite 60 requisições sem autenticação por hora por IP.',
   submitAnApp: 'Enviar um app',
 }
@@ -454,7 +454,7 @@ const vi: Translations = {
   infoSubmitDesc: 'Bạn biết một ứng dụng y tế miễn phí và truy cập mở nên có ở đây? Gửi theo hai cách:',
   infoGithubIssue: 'GitHub issue',
   infoUsingTemplate: 'sử dụng mẫu "Thêm Ứng Dụng" của chúng tôi.',
-  infoEmail: 'Email',
+  infoEmail: 'Câu hỏi? Email',
   infoFooterNote: 'Số sao được lấy từ API GitHub và lưu cache trong 1 giờ. API cho phép 60 yêu cầu không xác thực mỗi giờ mỗi IP.',
   submitAnApp: 'Gửi ứng dụng',
 }
@@ -518,7 +518,7 @@ const id: Translations = {
   infoSubmitDesc: 'Tahu aplikasi medis gratis dan akses terbuka yang layak ada di sini? Kirimkan dengan dua cara:',
   infoGithubIssue: 'GitHub issue',
   infoUsingTemplate: 'menggunakan template "Tambah Aplikasi" kami.',
-  infoEmail: 'Email',
+  infoEmail: 'Pertanyaan? Email',
   infoFooterNote: 'Jumlah bintang diambil dari API GitHub dan disimpan dalam cache selama 1 jam. API mengizinkan 60 permintaan tanpa autentikasi per jam per IP.',
   submitAnApp: 'Kirim aplikasi',
 }

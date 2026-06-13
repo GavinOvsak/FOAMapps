@@ -47,7 +47,6 @@ export default function InfoModal({ onClose, submitEmail, onSubmitApp }: Props) 
         </ul>
 
         <h3 className="font-semibold text-gray-900 mb-2">{t.infoSubmitTitle}</h3>
-        <p className="mb-3 text-gray-600">{t.infoSubmitDesc}</p>
         <button
           onClick={() => { onClose(); onSubmitApp() }}
           className="w-full py-2.5 rounded-xl bg-blue-600 text-white text-sm font-semibold hover:bg-blue-700 transition-colors mb-3"
@@ -62,6 +61,17 @@ export default function InfoModal({ onClose, submitEmail, onSubmitApp }: Props) 
         </p>
 
         <p className="mt-4 text-xs text-gray-400">{t.infoFooterNote}</p>
+
+        <p className="mt-2 text-xs text-gray-400">
+          <a
+            href="https://github.com/gavinovsak/FOAMapps"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="text-blue-500 underline"
+          >
+            View source on GitHub
+          </a>
+        </p>
       </div>
     </div>
   )
