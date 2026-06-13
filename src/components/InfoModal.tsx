@@ -62,6 +62,17 @@ export default function InfoModal({ onClose, submitEmail, onSubmitApp }: Props) 
         </p>
 
         <p className="mt-4 text-xs text-gray-400">{t.infoFooterNote}</p>
+
+        <p className="mt-2 text-xs text-gray-400">
+          <a
+            href="https://github.com/gavinovsak/FOAMapps"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="text-blue-500 underline"
+          >
+            View source on GitHub
+          </a>
+        </p>
       </div>
     </div>
   )
