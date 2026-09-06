@@ -657,5 +657,26 @@
     ],
     "description": "Registry and results database for publicly and privately supported clinical studies, with over 400,000 trials from 220 countries.",
     "dateAdded": "2026-05-30"
+  },
+  {
+    "name": "AIhaoyisheng (AI好医生)",
+    "url": "https://aihaoyisheng.com/en",
+    "category": [
+      "clinical"
+    ],
+    "languages": [
+      "zh",
+      "en",
+      "es",
+      "ja"
+    ],
+    "tags": [
+      "calculators",
+      "emergency",
+      "critical-care",
+      "reference"
+    ],
+    "description": "Free multilingual bedside clinical calculators and guideline pathways for licensed clinicians. Browser-local compute; data never uploaded.",
+    "dateAdded": "2026-09-06"
   }
 ]
