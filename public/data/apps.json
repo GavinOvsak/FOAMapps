@@ -657,5 +657,27 @@
     ],
     "description": "Registry and results database for publicly and privately supported clinical studies, with over 400,000 trials from 220 countries.",
     "dateAdded": "2026-05-30"
+  },
+  {
+    "name": "AI HaoYisheng (AI好医生)",
+    "url": "https://aihaoyisheng.com/en",
+    "category": [
+      "clinical"
+    ],
+    "languages": [
+      "zh",
+      "en",
+      "es",
+      "fr"
+    ],
+    "tags": [
+      "calculators",
+      "emergency",
+      "critical-care",
+      "neurology"
+    ],
+    "access": "open",
+    "description": "Free multilingual bedside clinical calculators, scores, and scene pathways for licensed clinicians (NIHSS, sepsis, stroke code, PE, and more). Computed in-browser; data never uploaded.",
+    "dateAdded": "2026-09-06"
   }
 ]
