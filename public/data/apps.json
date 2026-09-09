@@ -659,8 +659,8 @@
     "dateAdded": "2026-05-30"
   },
   {
-    "name": "AI HaoYisheng (AI好医生)",
-    "url": "https://aihaoyisheng.com/en",
+    "name": "Yuan Doctor / 元医生",
+    "url": "https://www.yuandoctor.com/en",
     "category": [
       "clinical"
     ],
@@ -677,7 +677,7 @@
       "neurology"
     ],
     "access": "open",
-    "description": "Free multilingual bedside clinical calculators, scores, and scene pathways for licensed clinicians (NIHSS, sepsis, stroke code, PE, and more). Computed in-browser; data never uploaded.",
+    "description": "Free multilingual bedside clinical calculators, scores, and scene pathways for licensed clinicians (NIHSS, sepsis, stroke code, PE, and more). Computed in-browser; data never uploaded. Scene deep links: https://www.yuandoctor.com/r/sepsis, https://www.yuandoctor.com/r/stroke_code, https://www.yuandoctor.com/r/pe.",
     "dateAdded": "2026-09-06"
   }
 ]
