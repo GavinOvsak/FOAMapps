@@ -657,5 +657,27 @@
     ],
     "description": "Registry and results database for publicly and privately supported clinical studies, with over 400,000 trials from 220 countries.",
     "dateAdded": "2026-05-30"
+  },
+  {
+    "name": "Yuan Doctor / 元医生",
+    "url": "https://www.yuandoctor.com/en",
+    "category": [
+      "clinical"
+    ],
+    "languages": [
+      "zh",
+      "en",
+      "es",
+      "fr"
+    ],
+    "tags": [
+      "calculators",
+      "emergency",
+      "critical-care",
+      "neurology"
+    ],
+    "access": "open",
+    "description": "Free multilingual bedside clinical calculators, scores, and scene pathways for licensed clinicians (NIHSS, sepsis, stroke code, PE, and more). Computed in-browser; data never uploaded. Scene deep links: https://www.yuandoctor.com/r/sepsis, https://www.yuandoctor.com/r/stroke_code, https://www.yuandoctor.com/r/pe.",
+    "dateAdded": "2026-09-06"
   }
 ]
