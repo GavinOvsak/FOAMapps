@@ -657,5 +657,24 @@
     ],
     "description": "Registry and results database for publicly and privately supported clinical studies, with over 400,000 trials from 220 countries.",
     "dateAdded": "2026-05-30"
+  },
+  {
+    "name": "Yuan Doctor",
+    "url": "https://www.yuandoctor.com/en/tools/nihss",
+    "category": [
+      "clinical"
+    ],
+    "languages": [
+      "en",
+      "zh"
+    ],
+    "tags": [
+      "calculators",
+      "emergency",
+      "critical-care",
+      "neurology"
+    ],
+    "description": "Free bedside clinical calculators and pathways for licensed clinicians. Browser-local compute; no patient-data upload. Examples: NIHSS, sepsis pathway. Developed and reviewed with a tertiary-hospital clinician team.",
+    "dateAdded": "2026-09-24"
   }
 ]
