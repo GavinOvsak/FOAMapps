@@ -236,16 +236,19 @@
     "name": "High Frequency Jet Ventilation Simulator",
     "url": "https://jepennycuff-afk.github.io/JetVentilation/",
     "category": [
-      "clinical"
+      "clinical",
+      "education"
     ],
     "languages": [
       "en"
     ],
     "tags": [
-      "anesthesia"
+      "anesthesia",
+      "education"
     ],
     "description": "Learn about how to use High Frequency Jet Ventilation, use a setup checklist, as well as built in simulated learning",
-    "dateAdded": "2026-10-07"
+    "dateAdded": "2026-10-07",
+    "github": "jepennycuff-afk/JetVentilation"
   },
   {
     "name": "Internet Book of Critical Care (IBCC)",
