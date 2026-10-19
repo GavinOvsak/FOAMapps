@@ -675,5 +675,22 @@
     ],
     "description": "Concise, comprehensive clinical review resource originally developed by University of Toronto medical students, widely used for board preparation.",
     "dateAdded": "2026-05-25"
+  },
+  {
+    "name": "Peptide Dosage Calculator",
+    "url": "https://www.medicalblvd.com/peptides/calculator",
+    "category": [
+      "clinical"
+    ],
+    "languages": [
+      "en"
+    ],
+    "tags": [
+      "pharmacology",
+      "calculators"
+    ],
+    "description": "Enter a vial's mg and the diluent's ml to get the concentration, dose volume and U-100 syringe units. Free, runs in the browser with no login.",
+    "dateAdded": "2026-10-19",
+    "access": "open"
   }
 ]
