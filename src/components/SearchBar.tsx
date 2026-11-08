@@ -15,7 +15,9 @@ export default function SearchBar({ value, onChange }: Props) {
         </svg>
       </div>
       <input
-        type="search"
+        type="text"
+        enterKeyHint="search"
+        autoComplete="off"
         value={value}
         onChange={e => onChange(e.target.value)}
         placeholder={t.searchPlaceholder}

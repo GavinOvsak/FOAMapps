@@ -275,6 +275,11 @@ function AppInner({ languagePrefs, onSaveLanguagePrefs }: AppInnerProps) {
       return true;
     });
 
+    // Tiebreaker: newest first, falling back to later position in apps.json
+    const newestFirst = (a: App, b: App) =>
+      (b.dateAdded ?? "").localeCompare(a.dateAdded ?? "") ||
+      apps.indexOf(b) - apps.indexOf(a);
+
     if (sort === "date-asc") {
       result = [...result].sort((a, b) =>
         (a.dateAdded ?? "").localeCompare(b.dateAdded ?? "")
@@ -287,13 +292,15 @@ function AppInner({ languagePrefs, onSaveLanguagePrefs }: AppInnerProps) {
       result = [...result].sort(
         (a, b) =>
           parseStarCount(a.github ? repoStars[a.github] : undefined) -
-          parseStarCount(b.github ? repoStars[b.github] : undefined)
+            parseStarCount(b.github ? repoStars[b.github] : undefined) ||
+          newestFirst(a, b)
       );
     } else if (sort === "stars-desc") {
       result = [...result].sort(
         (a, b) =>
           parseStarCount(b.github ? repoStars[b.github] : undefined) -
-          parseStarCount(a.github ? repoStars[a.github] : undefined)
+            parseStarCount(a.github ? repoStars[a.github] : undefined) ||
+          newestFirst(a, b)
       );
     }
 
